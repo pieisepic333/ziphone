@@ -1,0 +1,35 @@
+/* THIS FILE WILL BE OVERWRITTEN BY DEV-C++ */
+/* DO NOT EDIT! */
+
+#include <windows.h> // include for version info constants
+
+
+//
+// TO CHANGE VERSION INFORMATION, EDIT PROJECT OPTIONS...
+//
+1 VERSIONINFO
+FILEVERSION 2,4,0,0
+PRODUCTVERSION 2,4,0,0
+FILETYPE VFT_APP
+{
+  BLOCK "StringFileInfo"
+	 {
+		 BLOCK "040904E4"
+		 {
+			 VALUE "CompanyName", "ZiPhone http://www.ziphone.org"
+			 VALUE "FileVersion", "2.4"
+			 VALUE "FileDescription", "ZiPhone v2.4"
+			 VALUE "InternalName", "ZiPhone"
+			 VALUE "LegalCopyright", "Zibri http://www.ziphone.org"
+			 VALUE "LegalTrademarks", "http://www.ziphone.org"
+			 VALUE "OriginalFilename", "ziphone.exe"
+			 VALUE "ProductName", "ZiPhone"
+			 VALUE "ProductVersion", "2.4"
+		 }
+	 }
+  BLOCK "VarFileInfo"
+	 {
+		 VALUE "Translation", 0x0409, 1252
+	 }
+}
+
