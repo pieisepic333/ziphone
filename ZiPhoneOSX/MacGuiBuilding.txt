@@ -1,0 +1,14 @@
+In order to build correctly, the following files must be copied into this
+directory:
+
+zibri.dat
+README.txt
+libMobileDevice742.dylib
+ziphone
+
+The ziphone binary must be separately build from the command line source. 
+Ideally the Universal Binary version should be used.
+
+All copyright on the enclosed source code (EXCLUDING ZiPhone itself) is
+hereby released.  The source for the MacOS GUI wrapper is placed into the
+public domain.
