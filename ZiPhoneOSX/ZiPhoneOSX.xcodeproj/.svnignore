@@ -1,3 +1,4 @@
 # Run this to make this file work: svn propset svn:ignore -F .svnignore .
 *.mode2v3
 *.pbxuser
+*.mode*

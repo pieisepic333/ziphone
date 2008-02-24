@@ -18,8 +18,6 @@
 		F83EE4950D68D14A006DA1BC /* zibri.dat in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48F0D68D14A006DA1BC /* zibri.dat */; };
 		F83EE4960D68D14A006DA1BC /* ziphone in Resources */ = {isa = PBXBuildFile; fileRef = F83EE4900D68D14A006DA1BC /* ziphone */; };
 		F83FA81E0D627A9B005A1AF6 /* iPhone.icns in Resources */ = {isa = PBXBuildFile; fileRef = F83FA81D0D627A9B005A1AF6 /* iPhone.icns */; };
-		F86308430D6758F4002750D9 /* paypal.gif in Resources */ = {isa = PBXBuildFile; fileRef = F86308420D6758F4002750D9 /* paypal.gif */; };
-		F863085A0D675B99002750D9 /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = F86308590D675B99002750D9 /* donate.html */; };
 		F8A04FED0D6233CC00F92F28 /* ZiPhoneWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A04FEC0D6233CC00F92F28 /* ZiPhoneWindowController.m */; };
 /* End PBXBuildFile section */
 
@@ -41,8 +39,6 @@
 		F83EE48F0D68D14A006DA1BC /* zibri.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = zibri.dat; path = ConsoleResources/zibri.dat; sourceTree = "<group>"; };
 		F83EE4900D68D14A006DA1BC /* ziphone */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = ziphone; path = ConsoleResources/ziphone; sourceTree = "<group>"; };
 		F83FA81D0D627A9B005A1AF6 /* iPhone.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iPhone.icns; sourceTree = "<group>"; };
-		F86308420D6758F4002750D9 /* paypal.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = paypal.gif; sourceTree = "<group>"; };
-		F86308590D675B99002750D9 /* donate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = donate.html; sourceTree = "<group>"; };
 		F8A04FEB0D6233CC00F92F28 /* ZiPhoneWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZiPhoneWindowController.h; sourceTree = "<group>"; };
 		F8A04FEC0D6233CC00F92F28 /* ZiPhoneWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZiPhoneWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,12 +120,10 @@
 				F83EE48E0D68D14A006DA1BC /* TROUBLESHOOTING.txt */,
 				F83EE48F0D68D14A006DA1BC /* zibri.dat */,
 				F83EE4900D68D14A006DA1BC /* ziphone */,
-				F86308420D6758F4002750D9 /* paypal.gif */,
 				F83FA81D0D627A9B005A1AF6 /* iPhone.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
-				F86308590D675B99002750D9 /* donate.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -192,8 +186,6 @@
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				F83FA81E0D627A9B005A1AF6 /* iPhone.icns in Resources */,
-				F86308430D6758F4002750D9 /* paypal.gif in Resources */,
-				F863085A0D675B99002750D9 /* donate.html in Resources */,
 				F83EE4910D68D14A006DA1BC /* dfu.dat in Resources */,
 				F83EE4930D68D14A006DA1BC /* README.txt in Resources */,
 				F83EE4940D68D14A006DA1BC /* TROUBLESHOOTING.txt in Resources */,
@@ -211,12 +203,16 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/../ziphone.cpp",
+				"$(SRCROOT)/../zibri.dat",
 			);
 			outputPaths = (
+				"$(SRCROOT)/ConsoleResources/ziphone",
+				"$(SRCROOT)/ConsoleResources/zibri.dat",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "#!/bin/bash\n\nDEST=`pwd`/ConsoleResources\n\necho \"Will copy files into $DEST\"\n\ncd ../ZiPhone\n\necho \"Building command line tools in `pwd`\"\n\nmake -f Makefile.osx clean all\n\nif [ \"$?\" != \"0\" ] ; then\n  echo \"Error building command line tool\" >&2\n  exit 1\nfi\n\nmkdir -p \"$DEST\"\n\nfor f in zibri.dat dfu.dat ziphone libMobileDevice742.dylib README.txt TROUBLESHOOTING.txt ; do\n  echo \"Copying $f...\"\n  cp \"$f\" \"$DEST\"\n  if [ \"$?\" != \"0\" ] ; then\n    echo \"Error copying file $f\" >&2\n    exit 2\n  fi\n  \ndone\n";
+			shellScript = "#!/bin/bash\n\nDEST=`pwd`/ConsoleResources\n\necho \"Will copy files into $DEST\"\n\ncd ..\n\necho \"Building command line tools in `pwd`\"\n\nmake -f Makefile.osx clean all\n\nif [ \"$?\" != \"0\" ] ; then\n  echo \"Error building command line tool\" >&2\n  exit 1\nfi\n\nmkdir -p \"$DEST\"\n\nfor f in zibri.dat dfu.dat ziphone libMobileDevice742.dylib README.txt TROUBLESHOOTING.txt ; do\n  echo \"Copying $f...\"\n  cp \"$f\" \"$DEST\"\n  if [ \"$?\" != \"0\" ] ; then\n    echo \"Error copying file $f\" >&2\n    exit 2\n  fi\n  \ndone\n";
 		};
 		F88A08740D64CE05007DF3E2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -229,7 +225,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "#!/bin/bash\n\nVERSION=`./getversion.sh`\n\ntar -cjvf ZiPhoneOSX-${VERSION}.tbz -C build/Release ZiPhoneOSX.app";
+			shellScript = "#!/bin/bash\n\nif [ \"$BUILD_STYLE\" == \"Release\" ] ; then\n\tVERSION=`./getversion.sh`\n\n\ttar -cjvf ZiPhoneOSX-${VERSION}.tbz -C build/Release ZiPhoneOSX.app\nelse\n\techo \"warning: Skipping packaging for non-Release build.\" >&2\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
