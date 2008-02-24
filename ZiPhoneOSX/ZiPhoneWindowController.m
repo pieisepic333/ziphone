@@ -206,10 +206,6 @@
     [opts addObject:@"-N"];
   } else if([m_btnEnterDFU state]) {
     [opts addObject:@"-D"];
-  } else if([m_mnuTestMode state]) {
-    [opts addObject:@"-t"];
-  } else if([m_mnuCoffee state]) {
-    [opts addObject:@"-C"];
   } else {
     // Activate?
     if([m_btnActivate state]) {
@@ -255,15 +251,22 @@
     return;
   }
   
-  //NSLog(@"Running ziphone with options: %@", opts);
-  
+  // Run the command
+  [self startConsoleWithOptions:opts];
+}
+
+/**
+ * Start the command line process with an array of command line parameters.
+ */
+- (void)startConsoleWithOptions:(NSArray*)opts {
   // Prevent any changes while we run.
   [self setCheckBoxesEnabled:NO except:nil clearState:NO];
   
   // Toggle buttons
   [m_btnStart setEnabled:NO];
   [m_btnStop setEnabled:YES];
-  
+
+  //NSLog(@"Running ziphone with options: %@", opts);
   
   NSString *toolPath = [[NSBundle mainBundle] pathForResource:@"ziphone" ofType:@""];
   
@@ -488,26 +491,44 @@
 }
 
 /**
- * Toggle the menu state.
+ * Run reboot-only test.
  */
 -(IBAction)mnuTestSelected:(id)sender {
-  [m_mnuTestMode setState:![m_mnuTestMode state]];
+  [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-t", nil]];
 }
 
 /**
- * Toggle test MD5.
+ * Run MD5 check.
  */
 - (IBAction)mnuCoffeeSelected:(id)sender {
-  [m_mnuCoffee setState:![m_mnuCoffee state]];
+  [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-C", nil]];
 }
 
 /**
- * Open the default browser for paypal donations.
+ * Do everything (-Z Y).
  */
-- (IBAction)btnDonateClicked:(id)sender {
-  NSString *strPath = [[NSBundle mainBundle] pathForResource:@"donate.html" ofType:nil];
-  NSURL *url = [NSURL fileURLWithPath:strPath];
-  [[NSWorkspace sharedWorkspace] openURL:url];
+- (IBAction)aioDoItAll:(id)sender {
+  [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-Z", @"Y", nil]];
 }
 
+/**
+ * Everything but unlock (-Z N).
+ */
+- (IBAction)aioDontUnlock:(id)sender {
+  [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-Z", @"N", nil]];
+}
+
+/**
+ * JB only (-j).
+ */
+- (IBAction)aioJailbreak:(id)sender {
+    [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-j", nil]];
+}
+
+/**
+ * Erase baseband (-b).
+ */
+- (IBAction)aioRefurbish:(id)sender {
+    [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-b", nil]];
+}
 @end

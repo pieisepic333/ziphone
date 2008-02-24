@@ -17,9 +17,6 @@
   IBOutlet NSButton *m_btnChangeImei;
   IBOutlet NSButton *m_btnErase;
   
-  IBOutlet NSMenuItem *m_mnuTestMode;
-  IBOutlet NSMenuItem *m_mnuCoffee;
-  
   IBOutlet NSButton *m_btnStart;
   IBOutlet NSButton *m_btnStop;
   
@@ -44,6 +41,8 @@
 
 - (void)loadFile:(NSString*)p_file toTextView:(NSTextView*)p_tv;
 
+- (void)startConsoleWithOptions:(NSArray*)opts;
+
 - (IBAction)startProcess:(id)sender;
 - (IBAction)stopProcess:(id)sender;
 - (IBAction)quitApplication:(id)sender;
@@ -51,9 +50,11 @@
 - (IBAction)checkboxClicked:(id)sender;
 
 - (IBAction)mnuTestSelected:(id)sender;
-
 - (IBAction)mnuCoffeeSelected:(id)sender;
-- (IBAction)btnDonateClicked:(id)sender;
 
-
+// All-in-one actions:
+- (IBAction)aioDoItAll:(id)sender;
+- (IBAction)aioDontUnlock:(id)sender;
+- (IBAction)aioJailbreak:(id)sender;
+- (IBAction)aioRefurbish:(id)sender;
 @end
