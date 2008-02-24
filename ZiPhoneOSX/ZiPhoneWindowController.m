@@ -265,6 +265,7 @@
   // Toggle buttons
   [m_btnStart setEnabled:NO];
   [m_btnStop setEnabled:YES];
+  [m_tableView setEnabled:NO];
 
   //NSLog(@"Running ziphone with options: %@", opts);
   
@@ -376,6 +377,8 @@
     // Fix the checkboxes
     [self setCheckBoxesEnabled:YES except:nil clearState:NO];
     [self checkboxClicked:self];
+    
+    [m_tableView setEnabled:YES];     
     
     // Let NSApp know it's time to go
     [NSApp replyToApplicationShouldTerminate:YES];
@@ -531,4 +534,104 @@
 - (IBAction)aioRefurbish:(id)sender {
     [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-b", nil]];
 }
+
+
+/**
+ * Return the number of items in the button table.
+ */
+- (int)numberOfRowsInTableView:(NSTableView *)aTableView {
+  return 4;
+}
+
+
+/**
+ * Return an object to display in the column/row.
+ */
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
+  if([[aTableColumn identifier] isEqualToString:@"text"]) {
+    return @"";
+  } else {
+    switch(rowIndex) {
+      case 0:
+        return [NSImage imageNamed:@"Unlocked.tif"];
+        break;
+      case 1:
+        return [NSImage imageNamed:@"Unlocked.tif"];
+        break;
+      case 2:
+        return [NSImage imageNamed:@"Key.tif"];
+        break;
+      case 3:
+        return [NSImage imageNamed:@"Locked.tif"];
+        break;
+      default:
+        return nil;
+    }
+  }
+}
+
+/**
+ * Adjust settings for individual table cells.
+ */
+- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(int)row {
+  if([[tableColumn identifier] isEqualToString:@"text"]) {
+    NSString *html = nil;
+    
+    switch(row) {
+      case 0:
+        html = @"<font size=\"+2\"><b>Do it all!</b></font><br/>Unlock, jailbreak, and activate";
+        break;
+      case 1:
+        html = @"<font size=\"+2\"><b>Don't Unlock</b></font><br/>Jailbreak and activate only";
+        break;
+      case 2:
+        html = @"<font size=\"+2\"><b>Jailbreak</b></font><br/>Best choice for 'official' carriers.<br/>Some 8GB iPod's also supported";
+        break;
+      case 3:
+        html = @"<font size=\"+2\"><b>Refurbish</b></font><br/>Erase baseband - restore will replace locks";
+        break;
+    }  
+    
+    NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]];
+    NSData *htmlData = [html dataUsingEncoding:NSUTF8StringEncoding];
+    NSAttributedString *attStr = [[NSAttributedString alloc] initWithHTML:htmlData baseURL:baseURL documentAttributes:nil];
+    
+    [cell setAttributedStringValue:attStr];
+    
+    [attStr release];
+  }
+}
+
+/**
+ * Delegate method detects when table item is clicked.
+ */
+- (void)tableViewSelectionDidChange:(NSNotification *)note {
+  NSTableView *tableView = [note object];
+  switch([tableView selectedRow]) {
+    case 0:
+      [self aioDoItAll:self];
+      break;
+    case 1:
+      [self aioDontUnlock:self];
+      break;
+    case 2:
+      [self aioJailbreak:self];
+      break;
+    case 3:
+      [self aioRefurbish:self];
+      break;
+  }
+}
+
+/**
+ * Don't allow selection to change if process is running.
+ */
+- (BOOL)selectionShouldChangeInTableView:(NSTableView *)aTableView {
+  if([m_processTask isRunning]) {
+    return NO;
+  } else {
+    return YES;
+  }
+}
 @end
+

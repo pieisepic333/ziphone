@@ -11,6 +11,9 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		F814D9A10D7214070046AF84 /* Locked.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D99F0D7214070046AF84 /* Locked.tif */; };
+		F814D9A20D7214070046AF84 /* Unlocked.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9A00D7214070046AF84 /* Unlocked.tif */; };
+		F814D9A50D72144C0046AF84 /* Key.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9A40D72144C0046AF84 /* Key.tif */; };
 		F83EE4910D68D14A006DA1BC /* dfu.dat in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48B0D68D14A006DA1BC /* dfu.dat */; };
 		F83EE4920D68D14A006DA1BC /* libMobileDevice742.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */; };
 		F83EE4930D68D14A006DA1BC /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48D0D68D14A006DA1BC /* README.txt */; };
@@ -32,6 +35,9 @@
 		32CA4F630368D1EE00C91783 /* ZiPhoneOSX_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZiPhoneOSX_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* ZiPhoneOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZiPhoneOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F814D99F0D7214070046AF84 /* Locked.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Locked.tif; sourceTree = "<group>"; };
+		F814D9A00D7214070046AF84 /* Unlocked.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Unlocked.tif; sourceTree = "<group>"; };
+		F814D9A40D72144C0046AF84 /* Key.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Key.tif; sourceTree = "<group>"; };
 		F83EE48B0D68D14A006DA1BC /* dfu.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = dfu.dat; path = ConsoleResources/dfu.dat; sourceTree = "<group>"; };
 		F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libMobileDevice742.dylib; path = ConsoleResources/libMobileDevice742.dylib; sourceTree = "<group>"; };
 		F83EE48D0D68D14A006DA1BC /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = ConsoleResources/README.txt; sourceTree = "<group>"; };
@@ -114,6 +120,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F814D9A40D72144C0046AF84 /* Key.tif */,
+				F814D99F0D7214070046AF84 /* Locked.tif */,
+				F814D9A00D7214070046AF84 /* Unlocked.tif */,
 				F83EE48B0D68D14A006DA1BC /* dfu.dat */,
 				F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */,
 				F83EE48D0D68D14A006DA1BC /* README.txt */,
@@ -191,6 +200,9 @@
 				F83EE4940D68D14A006DA1BC /* TROUBLESHOOTING.txt in Resources */,
 				F83EE4950D68D14A006DA1BC /* zibri.dat in Resources */,
 				F83EE4960D68D14A006DA1BC /* ziphone in Resources */,
+				F814D9A10D7214070046AF84 /* Locked.tif in Resources */,
+				F814D9A20D7214070046AF84 /* Unlocked.tif in Resources */,
+				F814D9A50D72144C0046AF84 /* Key.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

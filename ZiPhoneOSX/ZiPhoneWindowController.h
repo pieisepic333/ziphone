@@ -4,7 +4,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface ZiPhoneWindowController : NSWindowController {
   IBOutlet NSButton *m_btnDowngrade;
   IBOutlet NSButton *m_btnUnlock;
@@ -19,6 +18,8 @@
   
   IBOutlet NSButton *m_btnStart;
   IBOutlet NSButton *m_btnStop;
+  
+  IBOutlet NSTableView *m_tableView;
   
   IBOutlet NSTextView *m_txtProgress;
   
@@ -57,4 +58,11 @@
 - (IBAction)aioDontUnlock:(id)sender;
 - (IBAction)aioJailbreak:(id)sender;
 - (IBAction)aioRefurbish:(id)sender;
+
+// Datasource methods for all-in-one table
+- (int)numberOfRowsInTableView:(NSTableView *)aTableView;
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex;
+- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(int)row;
+- (void)tableViewSelectionDidChange:(NSNotification *)note;
+- (BOOL)selectionShouldChangeInTableView:(NSTableView *)aTableView;
 @end
