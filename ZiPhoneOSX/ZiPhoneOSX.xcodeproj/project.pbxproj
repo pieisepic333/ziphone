@@ -14,6 +14,7 @@
 		F814D9A10D7214070046AF84 /* Locked.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D99F0D7214070046AF84 /* Locked.tif */; };
 		F814D9A20D7214070046AF84 /* Unlocked.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9A00D7214070046AF84 /* Unlocked.tif */; };
 		F814D9A50D72144C0046AF84 /* Key.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9A40D72144C0046AF84 /* Key.tif */; };
+		F814D9E10D721DA50046AF84 /* Stop.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9E00D721DA50046AF84 /* Stop.tif */; };
 		F83EE4910D68D14A006DA1BC /* dfu.dat in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48B0D68D14A006DA1BC /* dfu.dat */; };
 		F83EE4920D68D14A006DA1BC /* libMobileDevice742.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */; };
 		F83EE4930D68D14A006DA1BC /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48D0D68D14A006DA1BC /* README.txt */; };
@@ -38,6 +39,7 @@
 		F814D99F0D7214070046AF84 /* Locked.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Locked.tif; sourceTree = "<group>"; };
 		F814D9A00D7214070046AF84 /* Unlocked.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Unlocked.tif; sourceTree = "<group>"; };
 		F814D9A40D72144C0046AF84 /* Key.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Key.tif; sourceTree = "<group>"; };
+		F814D9E00D721DA50046AF84 /* Stop.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Stop.tif; sourceTree = "<group>"; };
 		F83EE48B0D68D14A006DA1BC /* dfu.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = dfu.dat; path = ConsoleResources/dfu.dat; sourceTree = "<group>"; };
 		F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libMobileDevice742.dylib; path = ConsoleResources/libMobileDevice742.dylib; sourceTree = "<group>"; };
 		F83EE48D0D68D14A006DA1BC /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = ConsoleResources/README.txt; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F814D9E00D721DA50046AF84 /* Stop.tif */,
 				F814D9A40D72144C0046AF84 /* Key.tif */,
 				F814D99F0D7214070046AF84 /* Locked.tif */,
 				F814D9A00D7214070046AF84 /* Unlocked.tif */,
@@ -203,6 +206,7 @@
 				F814D9A10D7214070046AF84 /* Locked.tif in Resources */,
 				F814D9A20D7214070046AF84 /* Unlocked.tif in Resources */,
 				F814D9A50D72144C0046AF84 /* Key.tif in Resources */,
+				F814D9E10D721DA50046AF84 /* Stop.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

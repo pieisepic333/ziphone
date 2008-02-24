@@ -26,37 +26,22 @@
   m_dctButtonStates = [[NSDictionary dictionaryWithObjectsAndKeys: 
                         
                         [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnEnterRecovery, m_btnExitRecovery, m_btnEnterDFU, nil], NOSHOWIF_KEY,
+                         //[NSArray arrayWithObjects: nil], NOSHOWIF_KEY,
                          //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
                          nil], [NSNumber numberWithInt:[m_btnJailbreak tag]],
                         
                         [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnEnterRecovery, m_btnExitRecovery, m_btnEnterDFU, nil], NOSHOWIF_KEY,
+                         //[NSArray arrayWithObjects: nil], NOSHOWIF_KEY,
                          //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
                          nil], [NSNumber numberWithInt:[m_btnActivate tag]],
                         
                         [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnEnterRecovery, m_btnExitRecovery, m_btnEnterDFU, m_btnDowngrade, m_btnErase, nil], NOSHOWIF_KEY,
+                         [NSArray arrayWithObjects:  m_btnDowngrade, m_btnErase, nil], NOSHOWIF_KEY,
                          //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
                          nil], [NSNumber numberWithInt:[m_btnUnlock tag]],
-                        
+                                              
                         [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnJailbreak, m_btnActivate, m_btnUnlock, m_btnExitRecovery, m_btnEnterDFU, m_btnChangeImei, m_btnErase, m_btnDowngrade, nil], NOSHOWIF_KEY,
-                         //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_btnEnterRecovery tag]],
-                        
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnJailbreak, m_btnActivate, m_btnUnlock, m_btnEnterRecovery, m_btnEnterDFU, m_btnChangeImei, m_btnErase, m_btnDowngrade, nil], NOSHOWIF_KEY,
-                         //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_btnExitRecovery tag]],
-                        
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnJailbreak, m_btnActivate, m_btnUnlock, m_btnEnterRecovery, m_btnExitRecovery, m_btnChangeImei, m_btnErase, m_btnDowngrade, nil], NOSHOWIF_KEY,
-                         //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_btnEnterDFU tag]],
-                        
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnEnterRecovery, m_btnExitRecovery, m_btnEnterDFU, m_btnDowngrade, m_btnErase, nil], NOSHOWIF_KEY,
+                         [NSArray arrayWithObjects: m_btnDowngrade, m_btnErase, nil], NOSHOWIF_KEY,
                          //[NSArray arrayWithObjects: m_btnUnlock, nil], ONLYSHOWIF_KEY,
                          nil], [NSNumber numberWithInt:[m_btnChangeImei tag]],
                         
@@ -66,12 +51,12 @@
                          nil], [NSNumber numberWithInt:[m_txtImei tag]],
                         
                         [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnEnterRecovery, m_btnExitRecovery, m_btnEnterDFU, m_btnDowngrade, m_btnUnlock, m_btnChangeImei, nil], NOSHOWIF_KEY,
+                         [NSArray arrayWithObjects:  m_btnDowngrade, m_btnUnlock, m_btnChangeImei, nil], NOSHOWIF_KEY,
                          //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
                          nil], [NSNumber numberWithInt:[m_btnErase tag]],
                         
                         [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnEnterRecovery, m_btnExitRecovery, m_btnEnterDFU, m_btnErase, m_btnUnlock, m_btnChangeImei, nil], NOSHOWIF_KEY,
+                         [NSArray arrayWithObjects:  m_btnErase, m_btnUnlock, m_btnChangeImei, nil], NOSHOWIF_KEY,
                          //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
                          nil], [NSNumber numberWithInt:[m_btnDowngrade tag]],                        
                         
@@ -79,8 +64,7 @@
                        ] retain];
   
   
-    m_arControls = [[NSArray arrayWithObjects:m_btnDowngrade, m_btnUnlock, m_btnActivate, 
-                  m_btnJailbreak, m_btnEnterRecovery, m_btnExitRecovery, m_btnEnterDFU, 
+    m_arControls = [[NSArray arrayWithObjects:m_btnDowngrade, m_btnUnlock, m_btnActivate, m_btnJailbreak, 
                   m_btnChangeImei, m_btnErase, m_txtImei, nil] retain];
   }
 
@@ -200,12 +184,6 @@
   // First get the singleton's taken care of
   if([m_btnDowngrade state]) {
     [opts addObject:@"-b"];
-  } else if([m_btnEnterRecovery state]) {
-    [opts addObject:@"-R"];
-  } else if([m_btnExitRecovery state]) {
-    [opts addObject:@"-N"];
-  } else if([m_btnEnterDFU state]) {
-    [opts addObject:@"-D"];
   } else {
     // Activate?
     if([m_btnActivate state]) {
@@ -508,6 +486,13 @@
 }
 
 /**
+ * Open the website.
+ */
+- (IBAction)openWebsite:(id)sender {
+  [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.ziphone.org/"]];
+}
+
+/**
  * Do everything (-Z Y).
  */
 - (IBAction)aioDoItAll:(id)sender {
@@ -533,6 +518,27 @@
  */
 - (IBAction)aioRefurbish:(id)sender {
     [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-b", nil]];
+}
+
+/**
+ * Restart in DFU mode.
+ */
+- (IBAction)dfuMode:(id)sender {
+  [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-D", nil]];
+}
+
+/** 
+ * Restart in recovery mode.
+ */
+- (IBAction)recoveryMode:(id)sender {
+  [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-R", nil]];
+}
+
+/**
+ * Normal restart (clear boot args).
+ */
+- (IBAction)normalMode:(id)sender {
+  [self startConsoleWithOptions:[NSArray arrayWithObjects:@"-N", nil]];
 }
 
 

@@ -10,9 +10,6 @@
   IBOutlet NSButton *m_btnActivate;
   IBOutlet NSButton *m_btnJailbreak;
   
-  IBOutlet NSButton *m_btnEnterRecovery;
-  IBOutlet NSButton *m_btnExitRecovery;
-  IBOutlet NSButton *m_btnEnterDFU;
   IBOutlet NSButton *m_btnChangeImei;
   IBOutlet NSButton *m_btnErase;
   
@@ -52,6 +49,13 @@
 
 - (IBAction)mnuTestSelected:(id)sender;
 - (IBAction)mnuCoffeeSelected:(id)sender;
+
+- (IBAction)openWebsite:(id)sender;
+
+// Restart modes:
+- (IBAction)dfuMode:(id)sender;
+- (IBAction)recoveryMode:(id)sender;
+- (IBAction)normalMode:(id)sender;
 
 // All-in-one actions:
 - (IBAction)aioDoItAll:(id)sender;
