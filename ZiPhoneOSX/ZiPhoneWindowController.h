@@ -17,6 +17,7 @@
   IBOutlet NSButton *m_btnStop;
   
   IBOutlet NSTableView *m_tableView;
+  IBOutlet NSTabView *m_tabView;
   
   IBOutlet NSTextView *m_txtProgress;
   
@@ -30,6 +31,8 @@
  
   NSDictionary *m_dctButtonStates;
   NSArray *m_arControls;
+  
+  int m_lastClickedOption;
 }
 
 - (void)awakeFromNib;
@@ -37,12 +40,18 @@
 - (void)killAlertDidEnd:(NSAlert*) p_lert returnCode:(int) p_ret contextInfo:(void*)p_ctx;
 - (void)windowWillClose:(NSNotification *)notification;
 
+- (void)writeProgress:(NSString*)p_str messageType:(int)p_msgType;
+- (void)writeProgressAttributed:(NSAttributedString*)p_att;
+- (void)writeHtmlProgress:(NSString*)p_html;
+- (void)clearProgress;
+
 - (void)loadFile:(NSString*)p_file toTextView:(NSTextView*)p_tv;
 
 - (void)startConsoleWithOptions:(NSArray*)opts;
 
 - (IBAction)startProcess:(id)sender;
 - (IBAction)stopProcess:(id)sender;
+- (IBAction)startProcessAdvanced:(id)sender;
 - (IBAction)quitApplication:(id)sender;
 - (IBAction)showAbout:(id)sender;
 - (IBAction)checkboxClicked:(id)sender;
@@ -51,6 +60,8 @@
 - (IBAction)mnuCoffeeSelected:(id)sender;
 
 - (IBAction)openWebsite:(id)sender;
+
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 
 // Restart modes:
 - (IBAction)dfuMode:(id)sender;
@@ -69,4 +80,5 @@
 - (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(int)row;
 - (void)tableViewSelectionDidChange:(NSNotification *)note;
 - (BOOL)selectionShouldChangeInTableView:(NSTableView *)aTableView;
+
 @end

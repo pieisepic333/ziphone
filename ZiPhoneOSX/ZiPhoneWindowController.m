@@ -14,54 +14,62 @@
 #define NOSHOWIF_KEY @"NOSHOWIF"
 #define ONLYSHOWIF_KEY @"ONLYSHOWIF"
 
+#define BASIC_INSTRUCTIONS @"<font face=\"Lucida Grande\"><p>Click any option at the left for more information, then click Start Process to begin.</p></font>"
+#define ADVANCED_INSTRUCTIONS @"<font face=\"Lucida Grande\"><p>FIXME</p></font>"
+
+
 @implementation ZiPhoneWindowController
 
 /**
  * Handle initilization once the GUI is loaded.
  */
 - (void)awakeFromNib {
+  m_lastClickedOption = -1;
   [self checkboxClicked:self];
   [m_btnStop setEnabled:NO];
+  [m_btnStart setEnabled:NO];
   
-  m_dctButtonStates = [[NSDictionary dictionaryWithObjectsAndKeys: 
-                        
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         //[NSArray arrayWithObjects: nil], NOSHOWIF_KEY,
-                         //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_btnJailbreak tag]],
-                        
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         //[NSArray arrayWithObjects: nil], NOSHOWIF_KEY,
-                         //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_btnActivate tag]],
-                        
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects:  m_btnDowngrade, m_btnErase, nil], NOSHOWIF_KEY,
-                         //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_btnUnlock tag]],
-                                              
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects: m_btnDowngrade, m_btnErase, nil], NOSHOWIF_KEY,
-                         //[NSArray arrayWithObjects: m_btnUnlock, nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_btnChangeImei tag]],
-                        
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         //[NSArray arrayWithObjects: nil], NOSHOWIF_KEY,
-                         [NSArray arrayWithObjects: m_btnChangeImei, nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_txtImei tag]],
-                        
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects:  m_btnDowngrade, m_btnUnlock, m_btnChangeImei, nil], NOSHOWIF_KEY,
-                         //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_btnErase tag]],
-                        
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSArray arrayWithObjects:  m_btnErase, m_btnUnlock, m_btnChangeImei, nil], NOSHOWIF_KEY,
-                         //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
-                         nil], [NSNumber numberWithInt:[m_btnDowngrade tag]],                        
-                        
-                        nil
-                       ] retain];
+  [self clearProgress];    
+  [self writeHtmlProgress:BASIC_INSTRUCTIONS];
+  
+  m_dctButtonStates = [[NSDictionary dictionaryWithObjectsAndKeys:                   
+      [NSDictionary dictionaryWithObjectsAndKeys:
+       //[NSArray arrayWithObjects: nil], NOSHOWIF_KEY,
+       //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
+       nil], [NSNumber numberWithInt:[m_btnJailbreak tag]],
+      
+      [NSDictionary dictionaryWithObjectsAndKeys:
+       //[NSArray arrayWithObjects: nil], NOSHOWIF_KEY,
+       //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
+       nil], [NSNumber numberWithInt:[m_btnActivate tag]],
+      
+      [NSDictionary dictionaryWithObjectsAndKeys:
+       [NSArray arrayWithObjects:  m_btnDowngrade, m_btnErase, nil], NOSHOWIF_KEY,
+       //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
+       nil], [NSNumber numberWithInt:[m_btnUnlock tag]],
+                            
+      [NSDictionary dictionaryWithObjectsAndKeys:
+       [NSArray arrayWithObjects: m_btnDowngrade, m_btnErase, nil], NOSHOWIF_KEY,
+       //[NSArray arrayWithObjects: m_btnUnlock, nil], ONLYSHOWIF_KEY,
+       nil], [NSNumber numberWithInt:[m_btnChangeImei tag]],
+      
+      [NSDictionary dictionaryWithObjectsAndKeys:
+       //[NSArray arrayWithObjects: nil], NOSHOWIF_KEY,
+       [NSArray arrayWithObjects: m_btnChangeImei, nil], ONLYSHOWIF_KEY,
+       nil], [NSNumber numberWithInt:[m_txtImei tag]],
+      
+      [NSDictionary dictionaryWithObjectsAndKeys:
+       [NSArray arrayWithObjects:  m_btnDowngrade, m_btnUnlock, m_btnChangeImei, nil], NOSHOWIF_KEY,
+       //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
+       nil], [NSNumber numberWithInt:[m_btnErase tag]],
+      
+      [NSDictionary dictionaryWithObjectsAndKeys:
+       [NSArray arrayWithObjects:  m_btnErase, m_btnUnlock, m_btnChangeImei, nil], NOSHOWIF_KEY,
+       //[NSArray arrayWithObjects: nil], ONLYSHOWIF_KEY,
+       nil], [NSNumber numberWithInt:[m_btnDowngrade tag]],                        
+      
+      nil
+     ] retain];
   
   
     m_arControls = [[NSArray arrayWithObjects:m_btnDowngrade, m_btnUnlock, m_btnActivate, m_btnJailbreak, 
@@ -164,16 +172,63 @@
   }
   
   NSAttributedString *attText = [[NSAttributedString alloc] initWithString:p_str attributes:attributes];
-  NSTextStorage *ts = [m_txtProgress textStorage];
-  [ts appendAttributedString:attText];
+  [self writeProgressAttributed:attText];
   [attText release];
+}
+
+/**
+ * Writes the given attributed string to the progress window.
+ */
+- (void)writeProgressAttributed:(NSAttributedString*)p_att {
+  NSTextStorage *ts = [m_txtProgress textStorage];
+  [ts appendAttributedString:p_att];
   [m_txtProgress scrollRangeToVisible:NSMakeRange([ts length], 0)];
+}
+
+/**
+ * Convert HTML to an attributed string and write it to the progress window.
+ */
+- (void)writeHtmlProgress:(NSString*)p_html {
+  NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]];
+  NSData *htmlData = [p_html dataUsingEncoding:NSUTF8StringEncoding];
+  NSAttributedString *attStr = [[NSAttributedString alloc] initWithHTML:htmlData baseURL:baseURL documentAttributes:nil];
+  [self writeProgressAttributed:attStr];
+  [attStr release];
+}
+
+/**
+ * Clear the progress window.
+ */
+- (void)clearProgress {
+  NSTextStorage *ts = [m_txtProgress textStorage];
+  [ts deleteCharactersInRange:NSMakeRange(0, [ts length])];
+}
+
+- (IBAction)startProcess:(id)sender {
+  if([m_tabView selectedTabViewItem] == [m_tabView tabViewItemAtIndex:0]) {
+    switch([m_tableView selectedRow]) {
+      case 0:
+        [self aioDoItAll:self];
+        break;
+      case 1:
+        [self aioDontUnlock:self];
+        break;
+      case 2:
+        [self aioJailbreak:self];
+        break;
+      case 3:
+        [self aioRefurbish:self];
+        break;
+    }
+  } else {
+    [self startProcessAdvanced:sender];
+  }
 }
 
 /**
  * Validate parameters, then start the unlocking process.
  */
-- (IBAction)startProcess:(id)sender {
+- (IBAction)startProcessAdvanced:(id)sender {
   if([m_btnChangeImei state] == NSOnState) {
     [m_txtImei validateEditing];
   }
@@ -613,20 +668,53 @@
  */
 - (void)tableViewSelectionDidChange:(NSNotification *)note {
   NSTableView *tableView = [note object];
+  NSString *html = nil;
+  
   switch([tableView selectedRow]) {
-    case 0:
-      [self aioDoItAll:self];
+    case 0: // Everything
+      html = @"<font face=\"Lucida Grande\">"
+        "<p><font size=\"+1\">Jailbreak, SIM Unlock, and activate iPhone in one stop.</font></p>"
+        "<p>This option will <b>downgrade the baseband bootloader</b> on 4.6 BL "
+        "phones (112+ OOB)</p><p>To use a brand new iPhone on any cell provider, "
+        "choose this option.</p>"
+        "<p>-------------------------------------------------</p>"
+        "</font>";
       break;
-    case 1:
-      [self aioDontUnlock:self];
+    case 1: // JB/Activate
+      html = @"<font face=\"Lucida Grande\">"
+        "<p><font size=\"+1\">Jailbreak and activate iPhone, leaves SIM-lock unchanged.</font></p>"
+        "<p>This will let an iPhone act &quot;like an iPod touch&quot;.  The phone "
+        "portion will not operate except on official carriers.</p>"
+        "<p>Customers of official carriers may prefer to use the "
+        "<b>Jailbreak ONLY</b> option instead.</p>"
+        "<p>-------------------------------------------------</p>"
+        "</font>";
       break;
-    case 2:
-      [self aioJailbreak:self];
+    case 2: // JB Only
+      html = @"<font face=\"Lucida Grande\">"
+        "<p><font size=\"+1\">Only jailbreaks an iPhone and installs Installer.app.</font></p>"
+        "<p>This option is only useful for customers of official cell carriers "
+        "as the phone must still be activated normally using iTunes.</p>"
+        "<p>This feature also supports <i>some</i> iPod Touch devices.  "
+        "Original 8GB and some 16GB iTouch have been reported to work.  "
+        "Newer 8/16GB and all 32GB are known to not work.  Stay tuned for updates.</p>"
+        "<p>-------------------------------------------------</p>"
+        "</font>";
       break;
-    case 3:
-      [self aioRefurbish:self];
+    case 3: // Refurb
+      html = @"<font face=\"Lucida Grande\">"
+        "<p><font size=\"+1\">Prepare for refurbish (-b)</font></p>"
+        "<p>Downgrades and reflashes bootloader and erases baseband, leaves phone in DFU "
+        "for firmware restore in iTunes.</p>"
+        "<p><b><i>May</i></b> be useful to refurbish a phone before returning to Apple for service.</p>"
+        "<p>-------------------------------------------------</p>"
+        "</font>";
       break;
   }
+  
+  [self clearProgress];    
+  [self writeHtmlProgress:html];
+  [m_btnStart setEnabled:YES];
 }
 
 /**
@@ -637,6 +725,24 @@
     return NO;
   } else {
     return YES;
+  }
+}
+
+/**
+ * Clear the selected index and disable the start button if they switch to advanced.
+ */
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
+  [m_btnStart setEnabled:NO];
+  [m_tableView deselectAll:self];
+  
+  if([tabView selectedTabViewItem] == [tabView tabViewItemAtIndex:0]) {
+    // Basic mode
+    [self clearProgress];    
+    [self writeHtmlProgress:BASIC_INSTRUCTIONS];
+  } else {
+    // Advanced
+    [self clearProgress];    
+    [self writeHtmlProgress:ADVANCED_INSTRUCTIONS];
   }
 }
 @end

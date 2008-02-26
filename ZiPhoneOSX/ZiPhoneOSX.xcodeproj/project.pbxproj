@@ -23,6 +23,7 @@
 		F83EE4960D68D14A006DA1BC /* ziphone in Resources */ = {isa = PBXBuildFile; fileRef = F83EE4900D68D14A006DA1BC /* ziphone */; };
 		F83FA81E0D627A9B005A1AF6 /* iPhone.icns in Resources */ = {isa = PBXBuildFile; fileRef = F83FA81D0D627A9B005A1AF6 /* iPhone.icns */; };
 		F8A04FED0D6233CC00F92F28 /* ZiPhoneWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A04FEC0D6233CC00F92F28 /* ZiPhoneWindowController.m */; };
+		F8AED6A60D74C3D700B14059 /* Start.tif in Resources */ = {isa = PBXBuildFile; fileRef = F8AED6A50D74C3D700B14059 /* Start.tif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		F83FA81D0D627A9B005A1AF6 /* iPhone.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iPhone.icns; sourceTree = "<group>"; };
 		F8A04FEB0D6233CC00F92F28 /* ZiPhoneWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZiPhoneWindowController.h; sourceTree = "<group>"; };
 		F8A04FEC0D6233CC00F92F28 /* ZiPhoneWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZiPhoneWindowController.m; sourceTree = "<group>"; };
+		F8AED6A50D74C3D700B14059 /* Start.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Start.tif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8AED6A50D74C3D700B14059 /* Start.tif */,
 				F814D9E00D721DA50046AF84 /* Stop.tif */,
 				F814D9A40D72144C0046AF84 /* Key.tif */,
 				F814D99F0D7214070046AF84 /* Locked.tif */,
@@ -207,6 +210,7 @@
 				F814D9A20D7214070046AF84 /* Unlocked.tif in Resources */,
 				F814D9A50D72144C0046AF84 /* Key.tif in Resources */,
 				F814D9E10D721DA50046AF84 /* Stop.tif in Resources */,
+				F8AED6A60D74C3D700B14059 /* Start.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
