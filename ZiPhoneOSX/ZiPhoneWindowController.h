@@ -32,7 +32,20 @@
   NSDictionary *m_dctButtonStates;
   NSArray *m_arControls;
   
-  int m_lastClickedOption;
+  NSURL *m_baseUrl;
+  
+  NSAttributedString *m_oneClickHelp;
+  NSAttributedString *m_advancedHelp;
+  
+  NSAttributedString *m_everythingHelp;
+  NSAttributedString *m_dontUnlockHelp;
+  NSAttributedString *m_jailbreakHelp;
+  NSAttributedString *m_refurbHelp;
+  
+  NSAttributedString *m_unlockButtonAS;
+  NSAttributedString *m_dontUnlockButtonAS;
+  NSAttributedString *m_jailbreakButtonAS;
+  NSAttributedString *m_refurbButtonAS;
 }
 
 - (void)awakeFromNib;
@@ -81,4 +94,5 @@
 - (void)tableViewSelectionDidChange:(NSNotification *)note;
 - (BOOL)selectionShouldChangeInTableView:(NSTableView *)aTableView;
 
+- (NSAttributedString*)aStringFromHtml:(NSString*)p_html;
 @end

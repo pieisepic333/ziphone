@@ -14,23 +14,71 @@
 #define NOSHOWIF_KEY @"NOSHOWIF"
 #define ONLYSHOWIF_KEY @"ONLYSHOWIF"
 
-#define BASIC_INSTRUCTIONS @"<font face=\"Lucida Grande\"><p>Click any option at the left for more information, then click Start Process to begin.</p></font>"
-#define ADVANCED_INSTRUCTIONS @"<font face=\"Lucida Grande\"><p>FIXME</p></font>"
-
-
 @implementation ZiPhoneWindowController
+
+/**
+ * Convert HTML to an attributed string.
+ */
+- (NSAttributedString*)aStringFromHtml:(NSString*)p_html {
+  NSData *htmlData = [p_html dataUsingEncoding:NSUTF8StringEncoding];
+  NSAttributedString *attStr = [[NSAttributedString alloc] initWithHTML:htmlData baseURL:m_baseUrl documentAttributes:nil];
+  return [attStr autorelease];
+}
 
 /**
  * Handle initilization once the GUI is loaded.
  */
 - (void)awakeFromNib {
-  m_lastClickedOption = -1;
+  m_baseUrl = [[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]] retain];
+  
+  m_oneClickHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><p>Click any option at the left for more information, then click Start Process to begin.</p></font>"] retain];
+  m_advancedHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><p>Check the actions to perform and click the Start Process button to begin.</p></font>"] retain];
+  
+  m_everythingHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\">"
+                       "<p><font size=\"+1\">Jailbreak, SIM Unlock, and activate iPhone in one step.</font></p>"
+                       "<p>This option will <b>downgrade the baseband bootloader</b> on 4.6 BL "
+                       "phones (112+ OOB).</p><p>To use a brand new iPhone on any cell provider, "
+                       "choose this option.</p>"
+                       "<p>-------------------------------------------------</p>"
+                       "</font>"] retain];
+  m_dontUnlockHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\">"
+                       "<p><font size=\"+1\">Jailbreak and activate iPhone, leave SIM-lock unchanged.</font></p>"
+                       "<p>This will let an iPhone act &quot;like an iPod Touch&quot;.  The phone "
+                       "portion will not operate except on official carriers.  "
+                       "This option does not change the baseband in any way.</p>"
+                       "<p>Customers of official carriers may prefer to use the "
+                       "<b>Jailbreak ONLY</b> option instead in order to retain "
+                       "&quot;real&quot; activation tokens.</p>"
+                       "<p>-------------------------------------------------</p>"
+                       "</font>"] retain];
+  m_jailbreakHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\">"
+                      "<p><font size=\"+1\">Only jailbreaks an iPhone and installs Installer.app.</font></p>"
+                      "<p>This option is only useful for customers of official cell carriers "
+                      "as the phone must still be activated normally using iTunes.</p>"
+                      "<p>This feature also supports <i>some</i> iPod Touch devices.  "
+                      "Original 8GB and some 16GB iTouch have been reported to work.  "
+                      "Newer 8/16GB and all 32GB are known to not work.  Stay tuned for updates.</p>"
+                      "<p>-------------------------------------------------</p>"
+                      "</font>"] retain];
+  m_refurbHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\">"
+                   "<p><font size=\"+1\">Prepare for refurbish (-b)</font></p>"
+                   "<p>Downgrades and reflashes bootloader and erases baseband, leaves phone in DFU "
+                   "for firmware restore in iTunes.</p>"
+                   "<p><b><i>May</i></b> be useful to refurbish a phone before returning to Apple for service.</p>"
+                   "<p>-------------------------------------------------</p>"
+                   "</font>"] retain];
+  
+  m_unlockButtonAS = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><font size=\"+2\"><b>Do it all!</b></font><br/>Unlock, jailbreak, and activate</font>"] retain];
+  m_dontUnlockButtonAS = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><font size=\"+2\"><b>Don't Unlock</b></font><br/>Jailbreak and activate only</font>"] retain];
+  m_jailbreakButtonAS = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><font size=\"+2\"><b>Jailbreak</b></font><br/>Best choice for 'official' carriers or iTouch.</font>"] retain];
+  m_refurbButtonAS = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><font size=\"+2\"><b>Refurbish</b></font><br/>Erase baseband - restore will replace locks</font>"] retain];
+  
   [self checkboxClicked:self];
   [m_btnStop setEnabled:NO];
   [m_btnStart setEnabled:NO];
   
   [self clearProgress];    
-  [self writeHtmlProgress:BASIC_INSTRUCTIONS];
+  [self writeProgressAttributed:m_oneClickHelp];
   
   m_dctButtonStates = [[NSDictionary dictionaryWithObjectsAndKeys:                   
       [NSDictionary dictionaryWithObjectsAndKeys:
@@ -85,6 +133,20 @@
   
   [m_arControls release];
   m_arControls = nil;
+  
+  [m_baseUrl release];
+  [m_oneClickHelp release];
+  [m_advancedHelp release];
+  
+  [m_everythingHelp release];
+  [m_dontUnlockHelp release];
+  [m_jailbreakHelp release];
+  [m_refurbHelp release];
+  
+  [m_unlockButtonAS release];
+  [m_dontUnlockButtonAS release];
+  [m_jailbreakButtonAS release];
+  [m_refurbButtonAS release];
 
   [super dealloc];
 }
@@ -204,6 +266,9 @@
   [ts deleteCharactersInRange:NSMakeRange(0, [ts length])];
 }
 
+/**
+ * Start processing - run one-click here or delegate to advanced.
+ */
 - (IBAction)startProcess:(id)sender {
   if([m_tabView selectedTabViewItem] == [m_tabView tabViewItemAtIndex:0]) {
     switch([m_tableView selectedRow]) {
@@ -404,7 +469,6 @@
     }
     
     // Toggle buttons
-    [m_btnStart setEnabled:YES];
     [m_btnStop setEnabled:NO];
     
     // Fix the checkboxes
@@ -636,30 +700,24 @@
  */
 - (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(int)row {
   if([[tableColumn identifier] isEqualToString:@"text"]) {
-    NSString *html = nil;
+    NSAttributedString *html = nil;
     
     switch(row) {
       case 0:
-        html = @"<font size=\"+2\"><b>Do it all!</b></font><br/>Unlock, jailbreak, and activate";
+        html = m_unlockButtonAS;
         break;
       case 1:
-        html = @"<font size=\"+2\"><b>Don't Unlock</b></font><br/>Jailbreak and activate only";
+        html = m_dontUnlockButtonAS;
         break;
       case 2:
-        html = @"<font size=\"+2\"><b>Jailbreak</b></font><br/>Best choice for 'official' carriers.<br/>Some 8GB iPod's also supported";
+        html = m_jailbreakButtonAS;
         break;
       case 3:
-        html = @"<font size=\"+2\"><b>Refurbish</b></font><br/>Erase baseband - restore will replace locks";
+        html = m_refurbButtonAS;
         break;
     }  
     
-    NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]];
-    NSData *htmlData = [html dataUsingEncoding:NSUTF8StringEncoding];
-    NSAttributedString *attStr = [[NSAttributedString alloc] initWithHTML:htmlData baseURL:baseURL documentAttributes:nil];
-    
-    [cell setAttributedStringValue:attStr];
-    
-    [attStr release];
+    [cell setAttributedStringValue:html];
   }
 }
 
@@ -668,52 +726,25 @@
  */
 - (void)tableViewSelectionDidChange:(NSNotification *)note {
   NSTableView *tableView = [note object];
-  NSString *html = nil;
+  NSAttributedString *html = nil;
   
   switch([tableView selectedRow]) {
     case 0: // Everything
-      html = @"<font face=\"Lucida Grande\">"
-        "<p><font size=\"+1\">Jailbreak, SIM Unlock, and activate iPhone in one stop.</font></p>"
-        "<p>This option will <b>downgrade the baseband bootloader</b> on 4.6 BL "
-        "phones (112+ OOB)</p><p>To use a brand new iPhone on any cell provider, "
-        "choose this option.</p>"
-        "<p>-------------------------------------------------</p>"
-        "</font>";
+      html = m_everythingHelp;
       break;
     case 1: // JB/Activate
-      html = @"<font face=\"Lucida Grande\">"
-        "<p><font size=\"+1\">Jailbreak and activate iPhone, leaves SIM-lock unchanged.</font></p>"
-        "<p>This will let an iPhone act &quot;like an iPod touch&quot;.  The phone "
-        "portion will not operate except on official carriers.</p>"
-        "<p>Customers of official carriers may prefer to use the "
-        "<b>Jailbreak ONLY</b> option instead.</p>"
-        "<p>-------------------------------------------------</p>"
-        "</font>";
+      html = m_dontUnlockHelp;
       break;
     case 2: // JB Only
-      html = @"<font face=\"Lucida Grande\">"
-        "<p><font size=\"+1\">Only jailbreaks an iPhone and installs Installer.app.</font></p>"
-        "<p>This option is only useful for customers of official cell carriers "
-        "as the phone must still be activated normally using iTunes.</p>"
-        "<p>This feature also supports <i>some</i> iPod Touch devices.  "
-        "Original 8GB and some 16GB iTouch have been reported to work.  "
-        "Newer 8/16GB and all 32GB are known to not work.  Stay tuned for updates.</p>"
-        "<p>-------------------------------------------------</p>"
-        "</font>";
+      html = m_jailbreakHelp;
       break;
     case 3: // Refurb
-      html = @"<font face=\"Lucida Grande\">"
-        "<p><font size=\"+1\">Prepare for refurbish (-b)</font></p>"
-        "<p>Downgrades and reflashes bootloader and erases baseband, leaves phone in DFU "
-        "for firmware restore in iTunes.</p>"
-        "<p><b><i>May</i></b> be useful to refurbish a phone before returning to Apple for service.</p>"
-        "<p>-------------------------------------------------</p>"
-        "</font>";
+      html = m_refurbHelp;
       break;
   }
   
   [self clearProgress];    
-  [self writeHtmlProgress:html];
+  [self writeProgressAttributed:html];
   [m_btnStart setEnabled:YES];
 }
 
@@ -732,17 +763,18 @@
  * Clear the selected index and disable the start button if they switch to advanced.
  */
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
-  [m_btnStart setEnabled:NO];
   [m_tableView deselectAll:self];
   
   if([tabView selectedTabViewItem] == [tabView tabViewItemAtIndex:0]) {
     // Basic mode
     [self clearProgress];    
-    [self writeHtmlProgress:BASIC_INSTRUCTIONS];
+    [self writeProgressAttributed:m_oneClickHelp];
+    [m_btnStart setEnabled:NO];
   } else {
     // Advanced
     [self clearProgress];    
-    [self writeHtmlProgress:ADVANCED_INSTRUCTIONS];
+    [self writeProgressAttributed:m_advancedHelp];
+    [m_btnStart setEnabled:YES];
   }
 }
 @end
