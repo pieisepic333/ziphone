@@ -49,7 +49,7 @@ char ramdisk[128]="zibri.dat";
 
 char dfudat[128]="dfu.dat";
 
-unsigned char rdmd5[16]= { 0x7f, 0x05, 0x56, 0x65, 0x8f, 0x8a, 0x2b, 0x7d, 0xcb, 0x3d, 0xa3, 0xfd, 0xba, 0xa0, 0x22, 0xb3 };
+unsigned char rdmd5[16]= {  0x38, 0x3f, 0xf1, 0xef, 0x3b, 0xee, 0x0b, 0x1d, 0x0e, 0x22, 0xe5, 0xf8, 0x81, 0x06, 0x7a, 0x60 };
 unsigned char dfumd5[16]= { 0x3f, 0xf3, 0xc0, 0xb3, 0x2d, 0xfa, 0xd6, 0x9a, 0xd6, 0x22, 0x2a, 0x59, 0x9d, 0x88, 0x2f, 0x20 };
 
 CFStringRef StringtoCFString(string input) {
@@ -365,29 +365,25 @@ bool temp_file_exists(const char *filename) {
       return true;
     }
     for (count = 0; count < 16; count++) {
-      if ((md5rd[count] != rdmd5[count]) &&(md5dfu[count] != dfumd5[count])) {
+      if ((md5rd[count] != rdmd5[count]) || (md5dfu[count] != dfumd5[count])) {
 
         cout << "Redownload ZiPhone !" << endl;
         cout << "Go get the full archive at http://www.ziphone.org" << endl;
 
-        //      printf("0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x\n",result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]);
-        //      printf("rdmd5: 0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x\n",rdmd5[0], rdmd5[1], rdmd5[2], rdmd5[3], rdmd5[4], rdmd5[5], rdmd5[6], rdmd5[7], rdmd5[8], rdmd5[9], rdmd5[10], rdmd5[11], rdmd5[12], rdmd5[13], rdmd5[14], rdmd5[15]);
-
         return false;
         break;
-//      } else {
-//        return true;
       }
+return true;
     }
   }
 
-//  cout << filename << " could not be opened for reading." << endl;
-//  ReportDone();
-  return true;
+  cout << filename << " could not be opened for reading." << endl;
+  ReportDone();
+  return false;
 }
 
 void Banner() {
-  cout << endl << "ZiPhone v2.4 by Zibri. http://www.ziphone.org" << endl;
+  cout << endl << "ZiPhone v2.5 by Zibri. http://www.ziphone.org" << endl;
   cout << "Source code available at: http://www.ziphone.org" << endl;
   cout << endl;
 }
