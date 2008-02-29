@@ -15,10 +15,11 @@
 		F814D9A20D7214070046AF84 /* Unlocked.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9A00D7214070046AF84 /* Unlocked.tif */; };
 		F814D9A50D72144C0046AF84 /* Key.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9A40D72144C0046AF84 /* Key.tif */; };
 		F814D9E10D721DA50046AF84 /* Stop.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9E00D721DA50046AF84 /* Stop.tif */; };
+		F81CE2F80D78784C0092E057 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F81CE2F60D78784C0092E057 /* Localizable.strings */; };
+		F81CE31A0D7886950092E057 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = F81CE3190D7886950092E057 /* README.txt */; };
+		F81CE31C0D78869E0092E057 /* TROUBLESHOOTING.txt in Resources */ = {isa = PBXBuildFile; fileRef = F81CE31B0D78869E0092E057 /* TROUBLESHOOTING.txt */; };
 		F83EE4910D68D14A006DA1BC /* dfu.dat in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48B0D68D14A006DA1BC /* dfu.dat */; };
 		F83EE4920D68D14A006DA1BC /* libMobileDevice742.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */; };
-		F83EE4930D68D14A006DA1BC /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48D0D68D14A006DA1BC /* README.txt */; };
-		F83EE4940D68D14A006DA1BC /* TROUBLESHOOTING.txt in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48E0D68D14A006DA1BC /* TROUBLESHOOTING.txt */; };
 		F83EE4950D68D14A006DA1BC /* zibri.dat in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48F0D68D14A006DA1BC /* zibri.dat */; };
 		F83EE4960D68D14A006DA1BC /* ziphone in Resources */ = {isa = PBXBuildFile; fileRef = F83EE4900D68D14A006DA1BC /* ziphone */; };
 		F83FA81E0D627A9B005A1AF6 /* iPhone.icns in Resources */ = {isa = PBXBuildFile; fileRef = F83FA81D0D627A9B005A1AF6 /* iPhone.icns */; };
@@ -41,10 +42,12 @@
 		F814D9A00D7214070046AF84 /* Unlocked.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Unlocked.tif; sourceTree = "<group>"; };
 		F814D9A40D72144C0046AF84 /* Key.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Key.tif; sourceTree = "<group>"; };
 		F814D9E00D721DA50046AF84 /* Stop.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Stop.tif; sourceTree = "<group>"; };
+		F81CE2F70D78784C0092E057 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F81CE3110D7884490092E057 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		F83EE48B0D68D14A006DA1BC /* dfu.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = dfu.dat; path = ConsoleResources/dfu.dat; sourceTree = "<group>"; };
 		F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libMobileDevice742.dylib; path = ConsoleResources/libMobileDevice742.dylib; sourceTree = "<group>"; };
-		F83EE48D0D68D14A006DA1BC /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = ConsoleResources/README.txt; sourceTree = "<group>"; };
-		F83EE48E0D68D14A006DA1BC /* TROUBLESHOOTING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TROUBLESHOOTING.txt; path = ConsoleResources/TROUBLESHOOTING.txt; sourceTree = "<group>"; };
+		F83EE48D0D68D14A006DA1BC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = English; path = ConsoleResources/English.lproj/README.txt; sourceTree = "<group>"; };
+		F83EE48E0D68D14A006DA1BC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = English; path = ConsoleResources/English.lproj/TROUBLESHOOTING.txt; sourceTree = "<group>"; };
 		F83EE48F0D68D14A006DA1BC /* zibri.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = zibri.dat; path = ConsoleResources/zibri.dat; sourceTree = "<group>"; };
 		F83EE4900D68D14A006DA1BC /* ziphone */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = ziphone; path = ConsoleResources/ziphone; sourceTree = "<group>"; };
 		F83FA81D0D627A9B005A1AF6 /* iPhone.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iPhone.icns; sourceTree = "<group>"; };
@@ -129,14 +132,15 @@
 				F814D9A40D72144C0046AF84 /* Key.tif */,
 				F814D99F0D7214070046AF84 /* Locked.tif */,
 				F814D9A00D7214070046AF84 /* Unlocked.tif */,
-				F83EE48B0D68D14A006DA1BC /* dfu.dat */,
-				F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */,
-				F83EE48D0D68D14A006DA1BC /* README.txt */,
-				F83EE48E0D68D14A006DA1BC /* TROUBLESHOOTING.txt */,
-				F83EE48F0D68D14A006DA1BC /* zibri.dat */,
-				F83EE4900D68D14A006DA1BC /* ziphone */,
 				F83FA81D0D627A9B005A1AF6 /* iPhone.icns */,
+				F83EE48B0D68D14A006DA1BC /* dfu.dat */,
+				F83EE48F0D68D14A006DA1BC /* zibri.dat */,
+				F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */,
+				F83EE4900D68D14A006DA1BC /* ziphone */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				F81CE31B0D78869E0092E057 /* TROUBLESHOOTING.txt */,
+				F81CE3190D7886950092E057 /* README.txt */,
+				F81CE2F60D78784C0092E057 /* Localizable.strings */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 			);
@@ -183,6 +187,13 @@
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ZiPhoneOSX" */;
 			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Italian,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* ZiPhoneOSX */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -202,8 +213,8 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				F83FA81E0D627A9B005A1AF6 /* iPhone.icns in Resources */,
 				F83EE4910D68D14A006DA1BC /* dfu.dat in Resources */,
-				F83EE4930D68D14A006DA1BC /* README.txt in Resources */,
-				F83EE4940D68D14A006DA1BC /* TROUBLESHOOTING.txt in Resources */,
+				F81CE31A0D7886950092E057 /* README.txt in Resources */,
+				F81CE31C0D78869E0092E057 /* TROUBLESHOOTING.txt in Resources */,
 				F83EE4950D68D14A006DA1BC /* zibri.dat in Resources */,
 				F83EE4960D68D14A006DA1BC /* ziphone in Resources */,
 				F814D9A10D7214070046AF84 /* Locked.tif in Resources */,
@@ -211,6 +222,7 @@
 				F814D9A50D72144C0046AF84 /* Key.tif in Resources */,
 				F814D9E10D721DA50046AF84 /* Stop.tif in Resources */,
 				F8AED6A60D74C3D700B14059 /* Start.tif in Resources */,
+				F81CE2F80D78784C0092E057 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +244,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "#!/bin/bash\n\nDEST=`pwd`/ConsoleResources\n\necho \"Will copy files into $DEST\"\n\ncd ..\n\necho \"Building command line tools in `pwd`\"\n\nmake -f Makefile.osx clean all\n\nif [ \"$?\" != \"0\" ] ; then\n  echo \"Error building command line tool\" >&2\n  exit 1\nfi\n\nmkdir -p \"$DEST\"\n\nfor f in zibri.dat dfu.dat ziphone libMobileDevice742.dylib README.txt TROUBLESHOOTING.txt ; do\n  echo \"Copying $f...\"\n  cp \"$f\" \"$DEST\"\n  if [ \"$?\" != \"0\" ] ; then\n    echo \"Error copying file $f\" >&2\n    exit 2\n  fi\n  \ndone\n";
+			shellScript = "#!/bin/bash\n\nDEST=`pwd`/ConsoleResources\n\necho \"Will copy files into $DEST\"\n\ncd ../ZiPhone\n\necho \"Building command line tools in `pwd`\"\n\nmake -f Makefile.osx clean all\n\nif [ \"$?\" != \"0\" ] ; then\n  echo \"Error building command line tool\" >&2\n  exit 1\nfi\n\nmkdir -p \"$DEST\"\n\nfor f in zibri.dat dfu.dat ziphone libMobileDevice742.dylib README.txt TROUBLESHOOTING.txt ; do\n  echo \"Copying $f...\"\n  cp \"$f\" \"$DEST\"\n  if [ \"$?\" != \"0\" ] ; then\n    echo \"Error copying file $f\" >&2\n    exit 2\n  fi\n  \ndone\n";
 		};
 		F88A08740D64CE05007DF3E2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -274,8 +286,33 @@
 			isa = PBXVariantGroup;
 			children = (
 				29B97319FDCFA39411CA2CEA /* English */,
+				F81CE3110D7884490092E057 /* Italian */,
 			);
 			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		F81CE2F60D78784C0092E057 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F81CE2F70D78784C0092E057 /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F81CE3190D7886950092E057 /* README.txt */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F83EE48D0D68D14A006DA1BC /* English */,
+			);
+			name = README.txt;
+			sourceTree = "<group>";
+		};
+		F81CE31B0D78869E0092E057 /* TROUBLESHOOTING.txt */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F83EE48E0D68D14A006DA1BC /* English */,
+			);
+			name = TROUBLESHOOTING.txt;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

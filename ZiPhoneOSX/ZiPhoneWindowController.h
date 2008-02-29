@@ -46,6 +46,7 @@
   NSAttributedString *m_dontUnlockButtonAS;
   NSAttributedString *m_jailbreakButtonAS;
   NSAttributedString *m_refurbButtonAS;
+  NSAttributedString *m_emptyAttString;
 }
 
 - (void)awakeFromNib;

@@ -31,47 +31,19 @@
 - (void)awakeFromNib {
   m_baseUrl = [[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]] retain];
   
-  m_oneClickHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><p>Click any option at the left for more information, then click Start Process to begin.</p></font>"] retain];
-  m_advancedHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><p>Check the actions to perform and click the Start Process button to begin.</p></font>"] retain];
-  
-  m_everythingHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\">"
-                       "<p><font size=\"+1\">Jailbreak, SIM Unlock, and activate iPhone in one step.</font></p>"
-                       "<p>This option will <b>downgrade the baseband bootloader</b> on 4.6 BL "
-                       "phones (112+ OOB).</p><p>To use a brand new iPhone on any cell provider, "
-                       "choose this option.</p>"
-                       "<p>-------------------------------------------------</p>"
-                       "</font>"] retain];
-  m_dontUnlockHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\">"
-                       "<p><font size=\"+1\">Jailbreak and activate iPhone, leave SIM-lock unchanged.</font></p>"
-                       "<p>This will let an iPhone act &quot;like an iPod Touch&quot;.  The phone "
-                       "portion will not operate except on official carriers.  "
-                       "This option does not change the baseband in any way.</p>"
-                       "<p>Customers of official carriers may prefer to use the "
-                       "<b>Jailbreak ONLY</b> option instead in order to retain "
-                       "&quot;real&quot; activation tokens.</p>"
-                       "<p>-------------------------------------------------</p>"
-                       "</font>"] retain];
-  m_jailbreakHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\">"
-                      "<p><font size=\"+1\">Only jailbreaks an iPhone and installs Installer.app.</font></p>"
-                      "<p>This option is only useful for customers of official cell carriers "
-                      "as the phone must still be activated normally using iTunes.</p>"
-                      "<p>This feature also supports <i>some</i> iPod Touch devices.  "
-                      "Original 8GB and some 16GB iTouch have been reported to work.  "
-                      "Newer 8/16GB and all 32GB are known to not work.  Stay tuned for updates.</p>"
-                      "<p>-------------------------------------------------</p>"
-                      "</font>"] retain];
-  m_refurbHelp = [[self aStringFromHtml:@"<font face=\"Lucida Grande\">"
-                   "<p><font size=\"+1\">Prepare for refurbish (-b)</font></p>"
-                   "<p>Downgrades and reflashes bootloader and erases baseband, leaves phone in DFU "
-                   "for firmware restore in iTunes.</p>"
-                   "<p><b><i>May</i></b> be useful to refurbish a phone before returning to Apple for service.</p>"
-                   "<p>-------------------------------------------------</p>"
-                   "</font>"] retain];
-  
-  m_unlockButtonAS = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><font size=\"+2\"><b>Do it all!</b></font><br/>Unlock, jailbreak, and activate</font>"] retain];
-  m_dontUnlockButtonAS = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><font size=\"+2\"><b>Don't Unlock</b></font><br/>Jailbreak and activate only</font>"] retain];
-  m_jailbreakButtonAS = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><font size=\"+2\"><b>Jailbreak</b></font><br/>Best choice for 'official' carriers or iTouch.</font>"] retain];
-  m_refurbButtonAS = [[self aStringFromHtml:@"<font face=\"Lucida Grande\"><font size=\"+2\"><b>Refurbish</b></font><br/>Erase baseband - restore will replace locks</font>"] retain];
+  // Rendering HTML to attributed strings can take some time.  Doing it every time we need to display something slows the GUI
+  // down quite a bit.  Instead, we render them all here and reuse the same attributed strings whenever we need them.
+  m_oneClickHelp = [[self aStringFromHtml:NSLocalizedString(@"PROGHELP_Initial", @"Html displayed in help window at program launch")] retain];
+  m_advancedHelp = [[self aStringFromHtml:NSLocalizedString(@"PROGHELP_Advanced", @"Html displayed in help window in advanced mode")] retain];
+  m_everythingHelp = [[self aStringFromHtml:NSLocalizedString(@"PROGHELP_DoItAll", @"Html giving info on the Do-It-All button")] retain];
+  m_dontUnlockHelp = [[self aStringFromHtml:NSLocalizedString(@"PROGHELP_DontUnlock", @"Html giving info on the Don't Unlock button")] retain];
+  m_jailbreakHelp = [[self aStringFromHtml:NSLocalizedString(@"PROGHELP_Jailbreak", @"Html giving info on the Jailbreak button (simple gui)")] retain];
+  m_refurbHelp = [[self aStringFromHtml:NSLocalizedString(@"PROGHELP_Refurb", @"Html giving info on the refurb/ierase button (simple gui)")] retain];
+  m_unlockButtonAS = [[self aStringFromHtml:NSLocalizedString(@"BUTTON_DoItAll", @"Html appears on the Do It All button")] retain];
+  m_dontUnlockButtonAS = [[self aStringFromHtml:NSLocalizedString(@"BUTTON_DontUnlock", @"Html appears on the Don't Unlock button")] retain];
+  m_jailbreakButtonAS = [[self aStringFromHtml:NSLocalizedString(@"BUTTON_Jailbreak", @"Html appears on the Jailbreak button (simple GUI)")] retain];
+  m_refurbButtonAS = [[self aStringFromHtml:NSLocalizedString(@"BUTTON_Refurb", @"Html appears on the Refurb/ierase button (simple GUI)")] retain];
+  m_emptyAttString = [[NSAttributedString alloc] initWithString:@""];
   
   [self checkboxClicked:self];
   [m_btnStop setEnabled:NO];
@@ -147,6 +119,7 @@
   [m_dontUnlockButtonAS release];
   [m_jailbreakButtonAS release];
   [m_refurbButtonAS release];
+  [m_emptyAttString release];
 
   [super dealloc];
 }
@@ -321,11 +294,11 @@
       if([m_btnChangeImei state]) {
         NSString *strImei = [m_txtImei stringValue];
         if(![self checkImei:strImei]) {
-          NSAlert *lert = [NSAlert alertWithMessageText:@"Invalid IMEI" 
-                                          defaultButton:@"OK" 
+          NSAlert *lert = [NSAlert alertWithMessageText:NSLocalizedString(@"DIALOG_InvalidIMEITitle", @"Invalid IMEI") 
+                                          defaultButton:NSLocalizedString(@"DIALOG_OK", @"OK for buttons")
                                         alternateButton:nil 
                                             otherButton:nil 
-                              informativeTextWithFormat:@"The new IMEI number must be 15 or 16 digits"];
+                              informativeTextWithFormat:NSLocalizedString(@"DIALOG_InvalidIMEIText", @"Requirements for IMEI number: The new IMEI number must be 15 or 16 digits")];
           [lert runModal];
           return;
         }
@@ -340,11 +313,11 @@
   }
   
   if([opts count] == 0) {
-    NSAlert *lert = [NSAlert alertWithMessageText:@"No parameters selected" 
-                                    defaultButton:@"OK" 
+    NSAlert *lert = [NSAlert alertWithMessageText:NSLocalizedString(@"DIALOG_NoAdvancedSelectedTitle", @"Dialog title when nothing selected in advanced mode: No parameters selected") 
+                                    defaultButton:NSLocalizedString(@"DIALOG_OK", @"OK for buttons")
                                   alternateButton:nil 
                                       otherButton:nil 
-                        informativeTextWithFormat:@"You must pick at least one action parameter from the checkboxes on the left."];
+                        informativeTextWithFormat:NSLocalizedString(@"DIALOG_NoAdvancedSelectedText", @"Dialog text when no advanced options selected: You must pick at least one action parameter from the checkboxes on the left.")];
     [lert runModal];
     return;
   }
@@ -407,9 +380,9 @@
   int exitCode = [theTask terminationStatus];
  
   if(exitCode != 0) {
-    [self writeProgress:[NSString stringWithFormat:@"\n\nERROR: ziphone returned %d", exitCode] messageType:PMT_ERROR];
+    [self writeProgress:[NSString stringWithFormat:NSLocalizedString(@"ConsoleErrorReturn", @"Ziphone returned non-zero.  Should begin w/ two newlines and must include %d param: \n\nERROR: ziphone returned %d"), exitCode] messageType:PMT_ERROR];
   } else {
-    [self writeProgress:@"\n\nZiPhone completed successfully!" messageType:PMT_SUCCESS];
+    [self writeProgress:NSLocalizedString(@"ConsoleSuccessReturn", @"Ziphone returned success.  Should start with two newlines: \n\nZiPhone completed successfully!") messageType:PMT_SUCCESS];
   }
   
   [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -437,11 +410,11 @@
  */
 - (IBAction)stopProcess:(id)sender {
   if([m_processTask isRunning]) {
-    NSAlert *lert = [NSAlert alertWithMessageText:@"Are you sure you want to kill ZiPhone?" 
-                                    defaultButton:@"Keep Running" 
-                                  alternateButton:@"Kill It"
+    NSAlert *lert = [NSAlert alertWithMessageText:NSLocalizedString(@"DIALOG_ConfirmKillTitle", @"Dialog title to confirm killing console app: Are you sure you want to kill ZiPhone?") 
+                                    defaultButton:NSLocalizedString(@"DIALOG_DeclineKill", @"Button title to decline killing console app: Keep Running")
+                                  alternateButton:NSLocalizedString(@"DIALOG_AcceptKill", @"Button title to confirm killing console app: Kill It")
                                       otherButton:nil 
-                        informativeTextWithFormat:@"Killing ZiPhone now may cause damage to your phone and/or baseband!"];
+                        informativeTextWithFormat:NSLocalizedString(@"DIALOG_ConfirmKillText", @"Dialog text explaining that killing ziphone may kill the phone: Killing ZiPhone now may cause damage to your phone and/or baseband!")];
     [lert setAlertStyle:NSCriticalAlertStyle];
     
     [lert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(killAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
@@ -608,7 +581,7 @@
  * Open the website.
  */
 - (IBAction)openWebsite:(id)sender {
-  [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.ziphone.org/"]];
+  [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:NSLocalizedString(@"URL_ZiphoneSite", @"URL of localized ziphone site: http://www.ziphone.org/")]];
 }
 
 /**
@@ -740,6 +713,9 @@
       break;
     case 3: // Refurb
       html = m_refurbHelp;
+      break;
+    default:
+      html = m_emptyAttString;
       break;
   }
   
