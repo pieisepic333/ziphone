@@ -4,12 +4,12 @@
 CPP  = g++.exe
 CC   = gcc.exe
 WINDRES = windres.exe
-RES  = ../trunk/ziphone_private.res
-OBJ  = ../trunk/ziphone.o ../trunk/privateFunctions.o ../trunk/md5.o $(RES)
-LINKOBJ  = ../trunk/ziphone.o ../trunk/privateFunctions.o ../trunk/md5.o $(RES)
+RES  = ziphone_private.res
+OBJ  = ziphone.o privateFunctions.o md5.o $(RES)
+LINKOBJ  = ziphone.o privateFunctions.o md5.o $(RES)
 LIBS =  -L"C:/Dev-Cpp/lib" iTunesMobileDevice.dll QTMLClient.dll  -s 
-INCS =  -I"C:/Dev-Cpp/include"  -I"C:/Program Files/QuickTime SDK/CIncludes"  -I"J:/ZiPhoneSVN/trunk" 
-CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"C:/Program Files/QuickTime SDK/CIncludes"  -I"J:/ZiPhoneSVN/trunk" 
+INCS =  -I"C:/Dev-Cpp/include"  -I"C:/Program Files/QuickTime SDK/CIncludes"  -I"C:/cyg/home/Zibri/ziphone" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"C:/Program Files/QuickTime SDK/CIncludes"  -I"C:/cyg/home/Zibri/ziphone" 
 BIN  = ziphone.exe
 CXXFLAGS = $(CXXINCS)    -O3
 CFLAGS = $(INCS)    -O3
@@ -26,14 +26,14 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o "ziphone.exe" $(LIBS)
 
-../trunk/ziphone.o: ziphone.cpp
-	$(CPP) -c ziphone.cpp -o ../trunk/ziphone.o $(CXXFLAGS)
+ziphone.o: ziphone.cpp
+	$(CPP) -c ziphone.cpp -o ziphone.o $(CXXFLAGS)
 
-../trunk/privateFunctions.o: privateFunctions.cpp
-	$(CPP) -c privateFunctions.cpp -o ../trunk/privateFunctions.o $(CXXFLAGS)
+privateFunctions.o: privateFunctions.cpp
+	$(CPP) -c privateFunctions.cpp -o privateFunctions.o $(CXXFLAGS)
 
-../trunk/md5.o: md5.c
-	$(CPP) -c md5.c -o ../trunk/md5.o $(CXXFLAGS)
+md5.o: md5.c
+	$(CPP) -c md5.c -o md5.o $(CXXFLAGS)
 
-../trunk/ziphone_private.res: ziphone_private.rc 
-	$(WINDRES) -i ziphone_private.rc --input-format=rc -o ../trunk/ziphone_private.res -O coff 
+ziphone_private.res: ziphone_private.rc 
+	$(WINDRES) -i ziphone_private.rc --input-format=rc -o ziphone_private.res -O coff 
