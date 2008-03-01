@@ -1,0 +1,11 @@
+v2.5b - 01-Mar-2008
+  Fix erase command for 4.04 baseband
+  
+v2.5a - 29-Feb-2008
+  Added donate link (Mac GUI only, no functional changes)
+  Inital support for internationalized versions
+  
+v2.5 - 29-Feb-2008
+  Support for 1.1.4 firmware
+  First Mac GUI release with new all-in-one options
+  

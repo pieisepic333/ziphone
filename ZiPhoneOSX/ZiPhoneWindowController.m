@@ -480,6 +480,8 @@
     [self loadFile:@"TROUBLESHOOTING.txt" toTextView:m_txtTrouble];    
     bLoaded = YES;
   }
+    
+  [m_txtGuiVersion setStringValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
   
   [m_wndAbout makeKeyAndOrderFront:self];
 }
@@ -582,6 +584,15 @@
  */
 - (IBAction)openWebsite:(id)sender {
   [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:NSLocalizedString(@"URL_ZiphoneSite", @"URL of localized ziphone site: http://www.ziphone.org/")]];
+}
+
+/**
+ * Open the donations page.
+ */
+- (IBAction)openDonate:(id)sender {
+  NSString *donatePath = [[NSBundle mainBundle] pathForResource:@"donate" ofType:@"html"];
+  NSURL *url = [NSURL fileURLWithPath:donatePath];
+  [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 /**

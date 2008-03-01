@@ -22,10 +22,12 @@ if [ "$1" == "extract" ] ; then
 				echo "  .... $BASE_NIB.nib"
 			
 				if [ -f "$lang.lproj/$BASE_NIB.strings" ] ; then
-					echo "  ###### ALREADY EXISTS - NOT overwriting."
+					DEST=$lang.lproj/$BASE_NIB-merge.strings
+					echo "  ###### Already exists - writing to $DEST."
 				else 
-					ibtool --generate-stringsfile $lang.lproj/$BASE_NIB.strings $nib
+					DEST=$lang.lproj/$BASE_NIB.strings					
 				fi
+				ibtool --generate-stringsfile $DEST $nib
 			done
 		else
 			echo "  .. Skipping BASE language: $lang"

@@ -27,6 +27,8 @@
   IBOutlet NSTextView *m_txtAbout;
   IBOutlet NSTextView *m_txtTrouble;
   
+  IBOutlet NSTextField *m_txtGuiVersion;
+  
   NSTask *m_processTask;
  
   NSDictionary *m_dctButtonStates;
@@ -74,6 +76,8 @@
 - (IBAction)mnuCoffeeSelected:(id)sender;
 
 - (IBAction)openWebsite:(id)sender;
+
+- (IBAction)openDonate:(id)sender;
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 

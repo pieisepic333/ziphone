@@ -15,6 +15,8 @@
 		F814D9A20D7214070046AF84 /* Unlocked.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9A00D7214070046AF84 /* Unlocked.tif */; };
 		F814D9A50D72144C0046AF84 /* Key.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9A40D72144C0046AF84 /* Key.tif */; };
 		F814D9E10D721DA50046AF84 /* Stop.tif in Resources */ = {isa = PBXBuildFile; fileRef = F814D9E00D721DA50046AF84 /* Stop.tif */; };
+		F817062C0D789015006A80B8 /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = F817062A0D789015006A80B8 /* donate.html */; };
+		F817062F0D789052006A80B8 /* paypal.gif in Resources */ = {isa = PBXBuildFile; fileRef = F817062E0D789052006A80B8 /* paypal.gif */; };
 		F81CE2F80D78784C0092E057 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F81CE2F60D78784C0092E057 /* Localizable.strings */; };
 		F81CE31A0D7886950092E057 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = F81CE3190D7886950092E057 /* README.txt */; };
 		F81CE31C0D78869E0092E057 /* TROUBLESHOOTING.txt in Resources */ = {isa = PBXBuildFile; fileRef = F81CE31B0D78869E0092E057 /* TROUBLESHOOTING.txt */; };
@@ -25,6 +27,7 @@
 		F83FA81E0D627A9B005A1AF6 /* iPhone.icns in Resources */ = {isa = PBXBuildFile; fileRef = F83FA81D0D627A9B005A1AF6 /* iPhone.icns */; };
 		F8A04FED0D6233CC00F92F28 /* ZiPhoneWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A04FEC0D6233CC00F92F28 /* ZiPhoneWindowController.m */; };
 		F8AED6A60D74C3D700B14059 /* Start.tif in Resources */ = {isa = PBXBuildFile; fileRef = F8AED6A50D74C3D700B14059 /* Start.tif */; };
+		F8C167600D7988FC009F0938 /* CHANGELOG.txt in Resources */ = {isa = PBXBuildFile; fileRef = F8C1675F0D7988FC009F0938 /* CHANGELOG.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,18 +45,21 @@
 		F814D9A00D7214070046AF84 /* Unlocked.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Unlocked.tif; sourceTree = "<group>"; };
 		F814D9A40D72144C0046AF84 /* Key.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Key.tif; sourceTree = "<group>"; };
 		F814D9E00D721DA50046AF84 /* Stop.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Stop.tif; sourceTree = "<group>"; };
+		F817062B0D789015006A80B8 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = English; path = English.lproj/donate.html; sourceTree = "<group>"; };
+		F817062E0D789052006A80B8 /* paypal.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = paypal.gif; sourceTree = "<group>"; };
 		F81CE2F70D78784C0092E057 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F81CE3110D7884490092E057 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		F83EE48B0D68D14A006DA1BC /* dfu.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = dfu.dat; path = ConsoleResources/dfu.dat; sourceTree = "<group>"; };
+		F83EE48B0D68D14A006DA1BC /* dfu.dat */ = {isa = PBXFileReference; lastKnownFileType = text; name = dfu.dat; path = ConsoleResources/dfu.dat; sourceTree = "<group>"; };
 		F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libMobileDevice742.dylib; path = ConsoleResources/libMobileDevice742.dylib; sourceTree = "<group>"; };
 		F83EE48D0D68D14A006DA1BC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = English; path = ConsoleResources/English.lproj/README.txt; sourceTree = "<group>"; };
 		F83EE48E0D68D14A006DA1BC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = English; path = ConsoleResources/English.lproj/TROUBLESHOOTING.txt; sourceTree = "<group>"; };
-		F83EE48F0D68D14A006DA1BC /* zibri.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = zibri.dat; path = ConsoleResources/zibri.dat; sourceTree = "<group>"; };
+		F83EE48F0D68D14A006DA1BC /* zibri.dat */ = {isa = PBXFileReference; lastKnownFileType = text; name = zibri.dat; path = ConsoleResources/zibri.dat; sourceTree = "<group>"; };
 		F83EE4900D68D14A006DA1BC /* ziphone */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = ziphone; path = ConsoleResources/ziphone; sourceTree = "<group>"; };
 		F83FA81D0D627A9B005A1AF6 /* iPhone.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iPhone.icns; sourceTree = "<group>"; };
 		F8A04FEB0D6233CC00F92F28 /* ZiPhoneWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZiPhoneWindowController.h; sourceTree = "<group>"; };
 		F8A04FEC0D6233CC00F92F28 /* ZiPhoneWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZiPhoneWindowController.m; sourceTree = "<group>"; };
 		F8AED6A50D74C3D700B14059 /* Start.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Start.tif; sourceTree = "<group>"; };
+		F8C1675F0D7988FC009F0938 /* CHANGELOG.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F817062E0D789052006A80B8 /* paypal.gif */,
 				F8AED6A50D74C3D700B14059 /* Start.tif */,
 				F814D9E00D721DA50046AF84 /* Stop.tif */,
 				F814D9A40D72144C0046AF84 /* Key.tif */,
@@ -138,11 +145,13 @@
 				F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */,
 				F83EE4900D68D14A006DA1BC /* ziphone */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				F817062A0D789015006A80B8 /* donate.html */,
 				F81CE31B0D78869E0092E057 /* TROUBLESHOOTING.txt */,
 				F81CE3190D7886950092E057 /* README.txt */,
 				F81CE2F60D78784C0092E057 /* Localizable.strings */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				F8C1675F0D7988FC009F0938 /* CHANGELOG.txt */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -223,6 +232,9 @@
 				F814D9E10D721DA50046AF84 /* Stop.tif in Resources */,
 				F8AED6A60D74C3D700B14059 /* Start.tif in Resources */,
 				F81CE2F80D78784C0092E057 /* Localizable.strings in Resources */,
+				F817062C0D789015006A80B8 /* donate.html in Resources */,
+				F817062F0D789052006A80B8 /* paypal.gif in Resources */,
+				F8C167600D7988FC009F0938 /* CHANGELOG.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +301,14 @@
 				F81CE3110D7884490092E057 /* Italian */,
 			);
 			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		F817062A0D789015006A80B8 /* donate.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F817062B0D789015006A80B8 /* English */,
+			);
+			name = donate.html;
 			sourceTree = "<group>";
 		};
 		F81CE2F60D78784C0092E057 /* Localizable.strings */ = {
