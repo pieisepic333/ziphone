@@ -20,7 +20,7 @@
  * Convert HTML to an attributed string.
  */
 - (NSAttributedString*)aStringFromHtml:(NSString*)p_html {
-  NSData *htmlData = [p_html dataUsingEncoding:NSUTF8StringEncoding];
+  NSData *htmlData = [p_html dataUsingEncoding:NSUnicodeStringEncoding];
   NSAttributedString *attStr = [[NSAttributedString alloc] initWithHTML:htmlData baseURL:m_baseUrl documentAttributes:nil];
   return [attStr autorelease];
 }

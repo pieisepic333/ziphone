@@ -47,7 +47,7 @@
 		F814D9E00D721DA50046AF84 /* Stop.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Stop.tif; sourceTree = "<group>"; };
 		F817062B0D789015006A80B8 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = English; path = English.lproj/donate.html; sourceTree = "<group>"; };
 		F817062E0D789052006A80B8 /* paypal.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = paypal.gif; sourceTree = "<group>"; };
-		F81CE2F70D78784C0092E057 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F81CE2F70D78784C0092E057 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F81CE3110D7884490092E057 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		F83EE48B0D68D14A006DA1BC /* dfu.dat */ = {isa = PBXFileReference; lastKnownFileType = text; name = dfu.dat; path = ConsoleResources/dfu.dat; sourceTree = "<group>"; };
 		F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libMobileDevice742.dylib; path = ConsoleResources/libMobileDevice742.dylib; sourceTree = "<group>"; };
@@ -59,6 +59,7 @@
 		F8A04FEB0D6233CC00F92F28 /* ZiPhoneWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZiPhoneWindowController.h; sourceTree = "<group>"; };
 		F8A04FEC0D6233CC00F92F28 /* ZiPhoneWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZiPhoneWindowController.m; sourceTree = "<group>"; };
 		F8AED6A50D74C3D700B14059 /* Start.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Start.tif; sourceTree = "<group>"; };
+		F8B9433B0D79BF7300D8A5C2 /* Spanish */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 10; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F8C1675F0D7988FC009F0938 /* CHANGELOG.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +204,7 @@
 				French,
 				German,
 				Italian,
+				Spanish,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* ZiPhoneOSX */;
 			projectDirPath = "";
@@ -331,6 +333,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F81CE2F70D78784C0092E057 /* English */,
+				F8B9433B0D79BF7300D8A5C2 /* Spanish */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
