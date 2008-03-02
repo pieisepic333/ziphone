@@ -6,6 +6,25 @@
    #+#          #+#     #+#        #+#    #+# #+#    #+# #+#   #+#+# #+#             
  ######### ########### ###        ###    ###  ########  ###    #### ##########       
 
+Ziphone version 2.5c (2nd Mar 2008) 17:56 CET
+===================================================================================
+Corrected a bug in 2.5b that prevented bootloader downgrade.
+
+Ziphone version 2.5b (1st Mar 2008) 10:39 CET
+===================================================================================
+Corrected a bug in 2.5 that prevented baseband erasing.
+
+
+Ziphone version 2.5 (29th Feb 2008) 05:08 CET
+===================================================================================
+
+Version 2.5 Supports Firmware version 1.1.4.
+
+If you use 2.5 on previous iPhone firmware versions, 
+you will have the new baseband (unlocked of course) and old OS.
+
+For 1.1.3 use version 2.4 OR 2.5 (still in testing for 1.1.3)
+
 Ziphone version 2.4 (17th Feb 2008) 23:28 CET
 ===================================================================================
 
