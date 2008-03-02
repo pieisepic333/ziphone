@@ -5,7 +5,7 @@ UnitCount=7
 Type=1
 Ver=1
 ObjFiles=
-Includes="C:\Program Files\QuickTime SDK\CIncludes";J:\ZiPhoneSVN\trunk
+Includes="C:\Program Files\QuickTime SDK\CIncludes";C:\cyg\home\Zibri\ziphone
 Libs=
 PrivateResource=ziphone_private.rc
 ResourceIncludes=
@@ -15,8 +15,8 @@ CppCompiler=_@@_
 Linker=iTunesMobileDevice.dll_@@_QTMLClient.dll_@@_
 IsCpp=1
 Icon=
-ExeOutput=..\trunk
-ObjectOutput=..\trunk
+ExeOutput=
+ObjectOutput=
 OverrideOutput=1
 OverrideOutputName=ziphone.exe
 HostApplication=
@@ -71,20 +71,20 @@ BuildCmd=$(CPP) -c privateFunctions.cpp -o privateFunctions.o $(CXXFLAGS)
 
 [VersionInfo]
 Major=2
-Minor=4
+Minor=5
 Release=0
-Build=0
+Build=3
 LanguageID=1033
 CharsetID=1252
 CompanyName=ZiPhone http://www.ziphone.org
-FileVersion=2.4
-FileDescription=ZiPhone v2.4
+FileVersion=2.5c
+FileDescription=ZiPhone v2.5c
 InternalName=ZiPhone
 LegalCopyright=Zibri http://www.ziphone.org
 LegalTrademarks=http://www.ziphone.org
 OriginalFilename=ziphone.exe
 ProductName=ZiPhone
-ProductVersion=2.4
+ProductVersion=2.5c
 AutoIncBuildNr=0
 
 [Unit5]

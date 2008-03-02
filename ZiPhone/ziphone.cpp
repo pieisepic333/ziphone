@@ -49,7 +49,7 @@ char ramdisk[128]="zibri.dat";
 
 char dfudat[128]="dfu.dat";
 
-unsigned char rdmd5[16]= {  0xa3,0xd7,0x11,0xfa,0x87,0x36,0xa4,0xb7,0xd0,0x18,0xc3,0x5c,0x8c,0x42,0x17,0x08 };
+unsigned char rdmd5[16]= {  0x82,0x00,0x71,0xd2,0x84,0xaf,0xb6,0xc7,0xbd,0xca,0xeb,0xc7,0xd6,0x41,0xdf,0xc2 };
 unsigned char dfumd5[16]= { 0x3f, 0xf3, 0xc0, 0xb3, 0x2d, 0xfa, 0xd6, 0x9a, 0xd6, 0x22, 0x2a, 0x59, 0x9d, 0x88, 0x2f, 0x20 };
 
 CFStringRef StringtoCFString(string input) {
@@ -383,7 +383,7 @@ return true;
 }
 
 void Banner() {
-  cout << endl << "ZiPhone v2.5 by Zibri. http://www.ziphone.org" << endl;
+  cout << endl << "ZiPhone v2.5c by Zibri. http://www.ziphone.org" << endl;
   cout << "Source code available at: http://www.ziphone.org" << endl;
   cout << endl;
 }
@@ -448,7 +448,7 @@ bool parse_args(int argc, char *argv[]) {
         ierase=true;
       else if (argv[i][1]=='t')
         ;
-//      			else if(argv[i][1]=='z') debug=true;
+ //     			else if(argv[i][1]=='z') debug=true;
       else if (argv[i][1]=='D') {
         if (!(temp_file_exists(dfudat))) {
           Banner();
