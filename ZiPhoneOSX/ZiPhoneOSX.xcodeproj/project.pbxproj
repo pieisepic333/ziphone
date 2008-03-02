@@ -18,8 +18,6 @@
 		F817062C0D789015006A80B8 /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = F817062A0D789015006A80B8 /* donate.html */; };
 		F817062F0D789052006A80B8 /* paypal.gif in Resources */ = {isa = PBXBuildFile; fileRef = F817062E0D789052006A80B8 /* paypal.gif */; };
 		F81CE2F80D78784C0092E057 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F81CE2F60D78784C0092E057 /* Localizable.strings */; };
-		F81CE31A0D7886950092E057 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = F81CE3190D7886950092E057 /* README.txt */; };
-		F81CE31C0D78869E0092E057 /* TROUBLESHOOTING.txt in Resources */ = {isa = PBXBuildFile; fileRef = F81CE31B0D78869E0092E057 /* TROUBLESHOOTING.txt */; };
 		F83EE4910D68D14A006DA1BC /* dfu.dat in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48B0D68D14A006DA1BC /* dfu.dat */; };
 		F83EE4920D68D14A006DA1BC /* libMobileDevice742.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */; };
 		F83EE4950D68D14A006DA1BC /* zibri.dat in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48F0D68D14A006DA1BC /* zibri.dat */; };
@@ -28,6 +26,8 @@
 		F8A04FED0D6233CC00F92F28 /* ZiPhoneWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A04FEC0D6233CC00F92F28 /* ZiPhoneWindowController.m */; };
 		F8AED6A60D74C3D700B14059 /* Start.tif in Resources */ = {isa = PBXBuildFile; fileRef = F8AED6A50D74C3D700B14059 /* Start.tif */; };
 		F8C167600D7988FC009F0938 /* CHANGELOG.txt in Resources */ = {isa = PBXBuildFile; fileRef = F8C1675F0D7988FC009F0938 /* CHANGELOG.txt */; };
+		F8F5C2410D7B1CE5006C9C9C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48D0D68D14A006DA1BC /* README.txt */; };
+		F8F5C2420D7B1CEF006C9C9C /* TROUBLESHOOTING.txt in Resources */ = {isa = PBXBuildFile; fileRef = F83EE48E0D68D14A006DA1BC /* TROUBLESHOOTING.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,8 +51,8 @@
 		F81CE3110D7884490092E057 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		F83EE48B0D68D14A006DA1BC /* dfu.dat */ = {isa = PBXFileReference; lastKnownFileType = text; name = dfu.dat; path = ConsoleResources/dfu.dat; sourceTree = "<group>"; };
 		F83EE48C0D68D14A006DA1BC /* libMobileDevice742.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libMobileDevice742.dylib; path = ConsoleResources/libMobileDevice742.dylib; sourceTree = "<group>"; };
-		F83EE48D0D68D14A006DA1BC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = English; path = ConsoleResources/English.lproj/README.txt; sourceTree = "<group>"; };
-		F83EE48E0D68D14A006DA1BC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = English; path = ConsoleResources/English.lproj/TROUBLESHOOTING.txt; sourceTree = "<group>"; };
+		F83EE48D0D68D14A006DA1BC /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = ConsoleResources/README.txt; sourceTree = "<group>"; };
+		F83EE48E0D68D14A006DA1BC /* TROUBLESHOOTING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TROUBLESHOOTING.txt; path = ConsoleResources/TROUBLESHOOTING.txt; sourceTree = "<group>"; };
 		F83EE48F0D68D14A006DA1BC /* zibri.dat */ = {isa = PBXFileReference; lastKnownFileType = text; name = zibri.dat; path = ConsoleResources/zibri.dat; sourceTree = "<group>"; };
 		F83EE4900D68D14A006DA1BC /* ziphone */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = ziphone; path = ConsoleResources/ziphone; sourceTree = "<group>"; };
 		F83FA81D0D627A9B005A1AF6 /* iPhone.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iPhone.icns; sourceTree = "<group>"; };
@@ -147,12 +147,12 @@
 				F83EE4900D68D14A006DA1BC /* ziphone */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				F817062A0D789015006A80B8 /* donate.html */,
-				F81CE31B0D78869E0092E057 /* TROUBLESHOOTING.txt */,
-				F81CE3190D7886950092E057 /* README.txt */,
+				F83EE48E0D68D14A006DA1BC /* TROUBLESHOOTING.txt */,
+				F8C1675F0D7988FC009F0938 /* CHANGELOG.txt */,
+				F83EE48D0D68D14A006DA1BC /* README.txt */,
 				F81CE2F60D78784C0092E057 /* Localizable.strings */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
-				F8C1675F0D7988FC009F0938 /* CHANGELOG.txt */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -225,8 +225,8 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				F83FA81E0D627A9B005A1AF6 /* iPhone.icns in Resources */,
 				F83EE4910D68D14A006DA1BC /* dfu.dat in Resources */,
-				F81CE31A0D7886950092E057 /* README.txt in Resources */,
-				F81CE31C0D78869E0092E057 /* TROUBLESHOOTING.txt in Resources */,
+				F8F5C2410D7B1CE5006C9C9C /* README.txt in Resources */,
+				F8F5C2420D7B1CEF006C9C9C /* TROUBLESHOOTING.txt in Resources */,
 				F83EE4950D68D14A006DA1BC /* zibri.dat in Resources */,
 				F83EE4960D68D14A006DA1BC /* ziphone in Resources */,
 				F814D9A10D7214070046AF84 /* Locked.tif in Resources */,
@@ -336,22 +336,6 @@
 				F8B9433B0D79BF7300D8A5C2 /* Spanish */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		F81CE3190D7886950092E057 /* README.txt */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F83EE48D0D68D14A006DA1BC /* English */,
-			);
-			name = README.txt;
-			sourceTree = "<group>";
-		};
-		F81CE31B0D78869E0092E057 /* TROUBLESHOOTING.txt */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F83EE48E0D68D14A006DA1BC /* English */,
-			);
-			name = TROUBLESHOOTING.txt;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -1,3 +1,7 @@
+v2.5c - 02-Mar-2008
+  Initial Spanish localization (thanks to Carola!)
+  Fixed bug that prevented bootloader downgrade
+
 v2.5b - 01-Mar-2008
   Fix erase command for 4.04 baseband
   
