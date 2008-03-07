@@ -56,6 +56,11 @@
 		F83EE48F0D68D14A006DA1BC /* zibri.dat */ = {isa = PBXFileReference; lastKnownFileType = text; name = zibri.dat; path = ConsoleResources/zibri.dat; sourceTree = "<group>"; };
 		F83EE4900D68D14A006DA1BC /* ziphone */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = ziphone; path = ConsoleResources/ziphone; sourceTree = "<group>"; };
 		F83FA81D0D627A9B005A1AF6 /* iPhone.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iPhone.icns; sourceTree = "<group>"; };
+		F84A4BFC0D81FD0A0027F38B /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		F84A4BFD0D81FD320027F38B /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F84A4BFE0D81FD390027F38B /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F84A4BFF0D81FD400027F38B /* French */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = French; path = French.lproj/donate.html; sourceTree = "<group>"; };
+		F84A4C170D81FDF90027F38B /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		F8A04FEB0D6233CC00F92F28 /* ZiPhoneWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZiPhoneWindowController.h; sourceTree = "<group>"; };
 		F8A04FEC0D6233CC00F92F28 /* ZiPhoneWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZiPhoneWindowController.m; sourceTree = "<group>"; };
 		F8AED6A50D74C3D700B14059 /* Start.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Start.tif; sourceTree = "<group>"; };
@@ -308,6 +313,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				089C165DFE840E0CC02AAC07 /* English */,
+				F84A4BFD0D81FD320027F38B /* French */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -317,6 +323,8 @@
 			children = (
 				29B97319FDCFA39411CA2CEA /* English */,
 				F81CE3110D7884490092E057 /* Italian */,
+				F84A4BFC0D81FD0A0027F38B /* French */,
+				F84A4C170D81FDF90027F38B /* Spanish */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -325,6 +333,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F817062B0D789015006A80B8 /* English */,
+				F84A4BFF0D81FD400027F38B /* French */,
 			);
 			name = donate.html;
 			sourceTree = "<group>";
@@ -334,6 +343,7 @@
 			children = (
 				F81CE2F70D78784C0092E057 /* English */,
 				F8B9433B0D79BF7300D8A5C2 /* Spanish */,
+				F84A4BFE0D81FD390027F38B /* French */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
