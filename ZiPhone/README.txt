@@ -6,6 +6,11 @@
    #+#          #+#     #+#        #+#    #+# #+#    #+# #+#   #+#+# #+#             
  ######### ########### ###        ###    ###  ########  ###    #### ##########       
 
+Ziphone version 2.6 (14th Mar 2008) 02:07 CET
+===================================================================================
+Added iPod Touch compatibility for firmware 1.1.4 ONLY.
+(restore to 1.1.4 then run ziphone -Z I)
+
 Ziphone version 2.5c (2nd Mar 2008) 17:56 CET
 ===================================================================================
 Corrected a bug in 2.5b that prevented bootloader downgrade.
