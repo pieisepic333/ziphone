@@ -30,6 +30,7 @@ char progressStr[64]="";
 char errorStr[64]="";
 unsigned char md5rd[16]="";
 unsigned char md5dfu[16]="";
+unsigned char md5igor[16]="";
 int lasterr;
 bool ExitAfterStage=false;
 bool unlock=false;
@@ -42,15 +43,19 @@ bool debug=false;
 bool dfu=false;
 bool recover=false;
 bool normalmode=false;
+bool ipod=false;
 
 char imei[127]="setenv imei ";
 
 char ramdisk[128]="zibri.dat";
 
+char igor[128]="igor.dat";
+
 char dfudat[128]="dfu.dat";
 
 unsigned char rdmd5[16]= {  0x82,0x00,0x71,0xd2,0x84,0xaf,0xb6,0xc7,0xbd,0xca,0xeb,0xc7,0xd6,0x41,0xdf,0xc2 };
 unsigned char dfumd5[16]= { 0x3f, 0xf3, 0xc0, 0xb3, 0x2d, 0xfa, 0xd6, 0x9a, 0xd6, 0x22, 0x2a, 0x59, 0x9d, 0x88, 0x2f, 0x20 };
+unsigned char igormd5[16]= { 0xea,0x61,0xa1,0x57,0xa8,0x3d,0xde,0x9e,0x45,0xde,0x89,0x99,0xdd,0xbb,0x8e,0x93 };
 
 CFStringRef StringtoCFString(string input) {
   return CFStringCreateWithCString(NULL, input.c_str(), CFSTRINGENCODING);
@@ -125,8 +130,12 @@ void PairIPhone(am_device *iPhone) {
 void Stage0() { // Register callbacks
   initPrivateFunctions();
 
+  if (Z!=3) {
   ProgressStep("Searching for iPhone...");
-
+  }
+  else {
+  ProgressStep("Searching for iPod...");
+  }
   if (!ExitAfterStage) {
     Stage=2;
   }
@@ -169,6 +178,17 @@ void Stage2(struct am_recovery_device *rdev) { // Booting in recovery mode
     ierase=false;
     bl39=true;
     dfu=false;
+  }
+
+  else if (Z==3) {
+    unlock=false;
+    jailbreak=true;
+    activate=false;
+    chimei=false;
+    ierase=false;
+    bl39=false;
+    dfu=false;
+    ipod=true;
   }
 
   // ******* SAFETY CHECKS *** SOME WILL BE REMOVED AFTER FAILPROOF TESTS *******
@@ -217,6 +237,10 @@ void Stage2(struct am_recovery_device *rdev) { // Booting in recovery mode
     sendFileToDevice(rdev, StringtoCFString(dfudat));
   }
 
+  if (ipod){
+    sendFileToDevice(rdev, StringtoCFString(igor));
+  }
+  
   if (bl39) {
     sendCommandToDevice(rdev, CFStringCreateWithCString(kCFAllocatorDefault, "setenv bl39 1", kCFStringEncodingUTF8));
   }
@@ -255,10 +279,12 @@ void Stage2(struct am_recovery_device *rdev) { // Booting in recovery mode
     sendCommandToDevice(rdev, CFStringCreateWithCString(kCFAllocatorDefault, "saveenv", kCFStringEncodingUTF8));
   }
 
-  if (!dfu) {
+  if (!dfu && !ipod) {
     sendCommandToDevice(rdev, CFStringCreateWithCString(kCFAllocatorDefault, "fsboot", kCFStringEncodingUTF8));
-  } else {
+  } else if (!ipod) {
     sendCommandToDevice(rdev, CFStringCreateWithCString(kCFAllocatorDefault, "go", kCFStringEncodingUTF8));
+  } else {
+    sendCommandToDevice(rdev, CFStringCreateWithCString(kCFAllocatorDefault, "bootx", kCFStringEncodingUTF8));
   }
 
   if (!unlock&&(activate||jailbreak)) {
@@ -347,11 +373,14 @@ bool temp_file_exists(const char *filename) {
   int count=0;
   FILE *pFile=fopen(filename, "rb");
   FILE *pFile2=fopen("dfu.dat", "rb");
-  if (pFile && pFile2) {
+  FILE *pFile3=fopen("igor.dat", "rb");
+  if (pFile && pFile2 && pFile3) {
     fclose(pFile);
     fclose(pFile2);
+    fclose(pFile3);
     md5_file(ramdisk, md5rd);
     md5_file(dfudat, md5dfu);
+    md5_file(igor, md5igor);
 
     if (debug) {
       printf(
@@ -362,10 +391,14 @@ bool temp_file_exists(const char *filename) {
           "dfu:0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x\n",
           md5dfu[0], md5dfu[1], md5dfu[2], md5dfu[3], md5dfu[4], md5dfu[5], md5dfu[6], md5dfu[7], md5dfu[8], md5dfu[9], md5dfu[10],
           md5dfu[11], md5dfu[12], md5dfu[13], md5dfu[14], md5dfu[15]);
+      printf(
+          "igor:0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x\n",
+          md5igor[0], md5igor[1], md5igor[2], md5igor[3], md5igor[4], md5igor[5], md5igor[6], md5igor[7], md5igor[8], md5igor[9], md5igor[10],
+          md5igor[11], md5igor[12], md5igor[13], md5igor[14], md5igor[15]);
       return true;
     }
     for (count = 0; count < 16; count++) {
-      if ((md5rd[count] != rdmd5[count]) || (md5dfu[count] != dfumd5[count])) {
+      if ((md5rd[count] != rdmd5[count]) || (md5dfu[count] != dfumd5[count]) || (md5igor[count] != igormd5[count])) {
 
         cout << "Redownload ZiPhone !" << endl;
         cout << "Go get the full archive at http://www.ziphone.org" << endl;
@@ -383,7 +416,7 @@ return true;
 }
 
 void Banner() {
-  cout << endl << "ZiPhone v2.5c by Zibri. http://www.ziphone.org" << endl;
+  cout << endl << "ZiPhone v2.6 by Zibri. http://www.ziphone.org" << endl;
   cout << "Source code available at: http://www.ziphone.org" << endl;
   cout << endl;
 }
@@ -417,6 +450,8 @@ void UsageNormal() {
   cout << endl;
   cout << "       -Z N: Do Everything BUT do not Unlock!" << endl;
   cout << endl;
+  cout << "       -Z I: I have an iPod Touch!" << endl;
+  cout << endl;
   cout << "       -Z A: Show me advanced commands !" << endl;
   cout << endl;
 }
@@ -448,7 +483,7 @@ bool parse_args(int argc, char *argv[]) {
         ierase=true;
       else if (argv[i][1]=='t')
         ;
- //     			else if(argv[i][1]=='z') debug=true;
+//      			else if(argv[i][1]=='z') debug=true;
       else if (argv[i][1]=='D') {
         if (!(temp_file_exists(dfudat))) {
           Banner();
@@ -498,6 +533,9 @@ bool parse_args(int argc, char *argv[]) {
             return true;
           } else if (argv[i+1][0]=='N') {
             Z=2;
+            return true;
+          } else if (argv[i+1][0]=='I') {
+            Z=3;
             return true;
           } else if (argv[i+1][0]=='A') {
             UsageAdvanced();
