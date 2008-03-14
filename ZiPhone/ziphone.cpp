@@ -44,6 +44,7 @@ bool dfu=false;
 bool recover=false;
 bool normalmode=false;
 bool ipod=false;
+bool fixnvram=false;
 
 char imei[127]="setenv imei ";
 
@@ -53,7 +54,7 @@ char igor[128]="igor.dat";
 
 char dfudat[128]="dfu.dat";
 
-unsigned char rdmd5[16]= {  0x82,0x00,0x71,0xd2,0x84,0xaf,0xb6,0xc7,0xbd,0xca,0xeb,0xc7,0xd6,0x41,0xdf,0xc2 };
+unsigned char rdmd5[16]= {  0xbc,0x6e,0x48,0xe2,0x7a,0x1a,0x9a,0x8f,0xd8,0x6e,0x81,0xfd,0xd9,0x88,0x11,0x84 };
 unsigned char dfumd5[16]= { 0x3f, 0xf3, 0xc0, 0xb3, 0x2d, 0xfa, 0xd6, 0x9a, 0xd6, 0x22, 0x2a, 0x59, 0x9d, 0x88, 0x2f, 0x20 };
 unsigned char igormd5[16]= { 0xea,0x61,0xa1,0x57,0xa8,0x3d,0xde,0x9e,0x45,0xde,0x89,0x99,0xdd,0xbb,0x8e,0x93 };
 
@@ -130,7 +131,7 @@ void PairIPhone(am_device *iPhone) {
 void Stage0() { // Register callbacks
   initPrivateFunctions();
 
-  if (Z!=3) {
+  if (Z<3) {
   ProgressStep("Searching for iPhone...");
   }
   else {
@@ -168,6 +169,7 @@ void Stage2(struct am_recovery_device *rdev) { // Booting in recovery mode
     ierase=false;
     bl39=true;
     dfu=false;
+    fixnvram=false;
   }
 
   else if (Z==2) {
@@ -178,6 +180,7 @@ void Stage2(struct am_recovery_device *rdev) { // Booting in recovery mode
     ierase=false;
     bl39=true;
     dfu=false;
+    fixnvram=false;
   }
 
   else if (Z==3) {
@@ -189,6 +192,19 @@ void Stage2(struct am_recovery_device *rdev) { // Booting in recovery mode
     bl39=false;
     dfu=false;
     ipod=true;
+    fixnvram=false;
+  }
+
+  else if (Z==4) {
+    unlock=false;
+    jailbreak=true;
+    activate=false;
+    chimei=false;
+    ierase=false;
+    bl39=false;
+    dfu=false;
+    ipod=true;
+    fixnvram=true;
   }
 
   // ******* SAFETY CHECKS *** SOME WILL BE REMOVED AFTER FAILPROOF TESTS *******
@@ -243,6 +259,10 @@ void Stage2(struct am_recovery_device *rdev) { // Booting in recovery mode
   
   if (bl39) {
     sendCommandToDevice(rdev, CFStringCreateWithCString(kCFAllocatorDefault, "setenv bl39 1", kCFStringEncodingUTF8));
+  }
+
+  if (fixnvram) {
+    sendCommandToDevice(rdev, CFStringCreateWithCString(kCFAllocatorDefault, "setenv fixnvram 1", kCFStringEncodingUTF8));
   }
 
   if (unlock) {
@@ -381,7 +401,6 @@ bool temp_file_exists(const char *filename) {
     md5_file(ramdisk, md5rd);
     md5_file(dfudat, md5dfu);
     md5_file(igor, md5igor);
-
     if (debug) {
       printf(
           "rd: 0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x,0x%2.2x\n",
@@ -416,7 +435,7 @@ return true;
 }
 
 void Banner() {
-  cout << endl << "ZiPhone v2.6 by Zibri. http://www.ziphone.org" << endl;
+  cout << endl << "ZiPhone v2.6b by Zibri. http://www.ziphone.org" << endl;
   cout << "Source code available at: http://www.ziphone.org" << endl;
   cout << endl;
 }
@@ -451,6 +470,8 @@ void UsageNormal() {
   cout << "       -Z N: Do Everything BUT do not Unlock!" << endl;
   cout << endl;
   cout << "       -Z I: I have an iPod Touch!" << endl;
+  cout << endl;
+  cout << "       -Z F: Fix NVRAM!" << endl;
   cout << endl;
   cout << "       -Z A: Show me advanced commands !" << endl;
   cout << endl;
@@ -536,6 +557,9 @@ bool parse_args(int argc, char *argv[]) {
             return true;
           } else if (argv[i+1][0]=='I') {
             Z=3;
+            return true;
+          } else if (argv[i+1][0]=='F') {
+            Z=4;
             return true;
           } else if (argv[i+1][0]=='A') {
             UsageAdvanced();

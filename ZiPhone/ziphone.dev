@@ -72,19 +72,19 @@ BuildCmd=$(CPP) -c privateFunctions.cpp -o privateFunctions.o $(CXXFLAGS)
 [VersionInfo]
 Major=2
 Minor=6
-Release=0
+Release=1
 Build=0
 LanguageID=1033
 CharsetID=1252
 CompanyName=ZiPhone http://www.ziphone.org
-FileVersion=2.6
-FileDescription=ZiPhone v2.6
+FileVersion=2.6b
+FileDescription=ZiPhone v2.6b
 InternalName=ZiPhone
 LegalCopyright=Zibri http://www.ziphone.org
 LegalTrademarks=http://www.ziphone.org
 OriginalFilename=ziphone.exe
 ProductName=ZiPhone
-ProductVersion=2.6
+ProductVersion=2.6b
 AutoIncBuildNr=0
 
 [Unit5]
